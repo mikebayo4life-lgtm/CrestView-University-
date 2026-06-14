@@ -1,0 +1,356 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Crestview University</title>
+
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap');
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Inter', sans-serif;
+        }
+
+        body {
+            background: #f6f8fc;
+            color: #1e293b;
+        }
+
+        header {
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 999;
+            backdrop-filter: blur(12px);
+            background: rgba(0, 33, 71, 0.85);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px 8%;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            color: white;
+            font-weight: 700;
+            letter-spacing: 0.5px;
+        }
+
+        .logo-box {
+            width: 40px;
+            height: 40px;
+            background: #f59e0b;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            border-radius: 10px;
+            font-weight: bold;
+        }
+
+        nav ul {
+            display: flex;
+            list-style: none;
+            gap: 22px;
+        }
+
+        nav ul li a {
+            color: white;
+            text-decoration: none;
+            font-size: 14px;
+            transition: 0.3s;
+        }
+
+        nav ul li a:hover {
+            color: #f59e0b;
+        }
+
+        .btn-login {
+            background: #f59e0b;
+            padding: 8px 14px;
+            border-radius: 8px;
+            color: white;
+            font-weight: 600;
+        }
+
+        .hero {
+            height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 120px 8% 60px;
+            background: linear-gradient(120deg, #002147, #003566, #00152e);
+            color: white;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero::before {
+            content: "";
+            position: absolute;
+            width: 500px;
+            height: 500px;
+            background: rgba(245, 158, 11, 0.15);
+            filter: blur(120px);
+            border-radius: 50%;
+            top: -100px;
+            left: -100px;
+        }
+
+        .hero-text {
+            max-width: 600px;
+            z-index: 2;
+        }
+
+        .hero-text h1 {
+            font-size: 3.5rem;
+            margin-bottom: 20px;
+            line-height: 1.2;
+        }
+
+        .hero-text p {
+            font-size: 1.1rem;
+            color: #dbeafe;
+            line-height: 1.7;
+        }
+
+        .hero-btns {
+            margin-top: 25px;
+            display: flex;
+            gap: 15px;
+            flex-wrap: wrap;
+        }
+
+        .btn {
+            padding: 12px 20px;
+            border-radius: 10px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: 0.3s;
+        }
+
+        .primary {
+            background: #f59e0b;
+            color: white;
+        }
+
+        .primary:hover {
+            transform: translateY(-3px);
+        }
+
+        .secondary {
+            background: white;
+            color: #002147;
+        }
+
+        .hero-card {
+            width: 420px;
+            height: 420px;
+            background: url('https://images.unsplash.com/photo-1562774053-701939374585');
+            background-size: cover;
+            background-position: center;
+            border-radius: 25px;
+            box-shadow: 0 25px 60px rgba(0, 0, 0, 0.3);
+            z-index: 2;
+        }
+
+        section {
+            padding: 90px 8%;
+        }
+
+        .title {
+            text-align: center;
+            font-size: 2.2rem;
+            color: #002147;
+            margin-bottom: 40px;
+            font-weight: 700;
+        }
+
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+            gap: 22px;
+        }
+
+        .card {
+            background: white;
+            padding: 28px;
+            border-radius: 16px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.06);
+            transition: 0.3s;
+        }
+
+        .card:hover {
+            transform: translateY(-8px);
+        }
+
+        .card h3 {
+            color: #002147;
+            margin-bottom: 10px;
+        }
+
+        .strip {
+            background: linear-gradient(90deg, #002147, #003566);
+            color: white;
+            text-align: center;
+            padding: 50px 8%;
+            font-weight: 600;
+            font-size: 1.1rem;
+        }
+
+        footer {
+            background: #00152e;
+            color: white;
+            text-align: center;
+            padding: 25px;
+        }
+
+        @media (max-width: 900px) {
+
+            .hero {
+                flex-direction: column;
+                text-align: center;
+                gap: 40px;
+            }
+
+            .hero-btns{
+                display: flex;
+                justify-content: center;
+            }
+
+            .hero-text h1 {
+                font-size: 2.0rem;
+                font-weight: 500;
+            }
+
+            .hero-card {
+                width: 90%;
+                height: 300px;
+            }
+
+            nav ul {
+                display: none;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <header>
+        <div class="logo">
+            <div class="logo-box">CU</div>
+            Crestview University
+        </div>
+
+        <nav>
+            <ul>
+                <li><a href="#">Home</a></li>
+                <li><a href="#about">About</a></li>
+                <li><a href="#admission">Admission</a></li>
+                <li><a href="#services">Services</a></li>
+                <li><a class="btn-login" href="login.html">Login</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <section class="hero">
+
+        <div class="hero-text">
+            <h1>Where Excellence Meets Innovation</h1>
+            <p>
+                Crestview University empowers students with world-class education,
+                modern research facilities, and global opportunities for success.
+            </p>
+
+            <div class="hero-btns">
+                <a href="apply.html" class="btn primary">Apply Now</a>
+                <a href="check-status.html" class="btn secondary">Check Status</a>
+            </div>
+        </div>
+
+        <div class="hero-card"></div>
+
+    </section>
+
+    <section id="about">
+        <h2 class="title">Why Choose Crestview</h2>
+
+        <div class="grid">
+            <div class="card">
+                <h3>Global Standard</h3>
+                <p>We follow international academic standards and excellence.</p>
+            </div>
+
+            <div class="card">
+                <h3>Expert Faculty</h3>
+                <p>Highly qualified lecturers and researchers across all faculties.</p>
+            </div>
+
+            <div class="card">
+                <h3>Modern Facilities</h3>
+                <p>Smart classrooms, labs, and digital learning systems.</p>
+            </div>
+        </div>
+    </section>
+
+    <section id="admission">
+        <h2 class="title">Admission Process</h2>
+
+        <div class="grid">
+            <div class="card">
+                <h3>1. Apply Online</h3>
+                <p>Fill the application form on our portal.</p>
+            </div>
+
+            <div class="card">
+                <h3>2. Review</h3>
+                <p>Your application is reviewed by our admissions team.</p>
+            </div>
+
+            <div class="card">
+                <h3>3. Admission</h3>
+                <p>Get your admission letter and matric number.</p>
+            </div>
+        </div>
+    </section>
+
+    <section id="services">
+        <h2 class="title">Student Services</h2>
+
+        <div class="grid">
+            <div class="card">
+                <h3>Apply Online</h3>
+                <p>Start your academic journey instantly.</p>
+            </div>
+
+            <div class="card">
+                <h3>Track Status</h3>
+                <p>Check your admission progress anytime.</p>
+            </div>
+
+            <div class="card">
+                <h3>Student Portal</h3>
+                <p>Access academic records and updates.</p>
+            </div>
+        </div>
+    </section>
+
+    <div class="strip">
+        10,000+ Students • 150+ Faculty • 95% Success Rate • 20+ Years Excellence
+    </div>
+
+    <footer>
+        © 2026 Crestview University. All Rights Reserved.
+    </footer>
+
+</body>
+
+</html>

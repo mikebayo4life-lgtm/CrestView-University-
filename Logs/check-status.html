@@ -1,0 +1,300 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Check Admission Status</title>
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: "Segoe UI", sans-serif;
+        }
+
+        body {
+            min-height: 100vh;
+            background: linear-gradient(rgba(0, 51, 102, .85),
+                    rgba(0, 51, 102, .85)),
+                url("https://images.unsplash.com/photo-1523050854058-8df90110c9f1?w=1200");
+            background-size: cover;
+            background-position: center;
+
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+        }
+
+        .container {
+            width: 100%;
+            max-width: 550px;
+            background: white;
+            padding: 35px;
+            border-radius: 20px;
+            box-shadow: 0 15px 40px rgba(0, 0, 0, .2);
+        }
+
+        h1 {
+            color: #003366;
+            text-align: center;
+            margin-bottom: 10px;
+        }
+
+        .typewriter {
+            text-align: center;
+            color: #f59e0b;
+            font-size: 18px;
+            font-weight: bold;
+            min-height: 30px;
+            margin-bottom: 25px;
+        }
+
+        input {
+            width: 100%;
+            padding: 14px;
+            border: 1px solid #ddd;
+            border-radius: 10px;
+            margin-bottom: 15px;
+            font-size: 15px;
+        }
+
+        button {
+            width: 100%;
+            padding: 14px;
+            background: #003366;
+            color: white;
+            border: none;
+            border-radius: 10px;
+            cursor: pointer;
+            font-size: 16px;
+            transition: .3s;
+        }
+
+        button:hover {
+            background: #f59e0b;
+        }
+
+        .result {
+            margin-top: 25px;
+            padding: 20px;
+            border-radius: 10px;
+            background: #f5f7fb;
+            display: none;
+        }
+
+        .status {
+            color: green;
+            font-weight: bold;
+            font-size: 18px;
+        }
+
+        .matric {
+            color: #003366;
+            font-size: 22px;
+            font-weight: bold;
+            margin-top: 10px;
+        }
+
+        .back {
+            display: block;
+            text-align: center;
+            margin-top: 20px;
+            text-decoration: none;
+            color: #003366;
+            font-weight: 600;
+        }
+
+        .back:hover {
+            color: #f59e0b;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="container">
+
+        <h1>Admission Status Checker</h1>
+
+        <div class="typewriter" id="typing">
+            <p class="subtitle">
+                Enter the email address used during your application to check your admission status.
+            </p>
+        </div>
+
+        <input type="email" id="email" placeholder="Enter your email address">
+
+        <button id="checkBtn">
+            Check Status
+        </button>
+
+        <div class="result" id="result">
+
+            <p class="status" id="status"></p>
+
+            <p class="matric" id="matric"></p>
+
+            <br>
+
+            <p id="message"></p>
+
+        </div>
+
+
+        <a href="login.html" class="back">
+            Go To Login →
+        </a>
+
+    </div>
+
+    <script type="module">
+
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/12.14.0/firebase-app.js";
+
+        import {
+            getFirestore,
+            collection,
+            getDocs
+        }
+            from "https://www.gstatic.com/firebasejs/12.14.0/firebase-firestore.js";
+
+        const firebaseConfig = {
+            apiKey: "AIzaSyDjcNfeAoSv6l22eELrmnX82rs0Uh3TJ9I",
+            authDomain: "school-management-f7a54.firebaseapp.com",
+            projectId: "school-management-f7a54",
+            storageBucket: "school-management-f7a54.firebasestorage.app",
+            messagingSenderId: "333306723954",
+            appId: "1:333306723954:web:36b88533e53aee10128ceb"
+        };
+
+        // Initialize Firebase
+        const app = initializeApp(firebaseConfig);
+        const db = getFirestore(app);
+
+
+        document.getElementById("checkBtn").addEventListener("click", async (e) => {
+            e.preventDefault();
+
+            const email = document.getElementById("email").value;
+
+            console.log(email);
+
+            const snapshot = await getDocs(
+                collection(db, "applications")
+            );
+
+            let found = false;
+
+            snapshot.forEach((doc) => {
+
+                const data = doc.data();
+
+                if (data.email === email) {
+
+                    console.log(data);
+                    
+                    found = true;
+
+
+                    document.getElementById("result").style.display = "block";
+
+
+
+                    if (data.status === "Pending") {
+                        Swal.fire({
+                            icon: 'info',
+                            title: 'Application Pending',
+                            text: 'Your application is still under review. Please check back later.',
+                        });
+                        document.getElementById("status").innerHTML =
+                            "Status: Pending ⏳";
+
+                    }
+
+                    else if (data.status === "Approved") {
+                        Swal.fire({
+                            icon: 'success',
+                            title: 'Application Approved',
+                            text: 'Congratulations! Your application has been approved.',
+                        });
+                        document.getElementById("status").innerHTML =
+                            "Status: Approved ";
+
+                        document.getElementById("matric").innerHTML =
+                            `Matric Number: ${data.matricNumber}`;
+
+                    }
+
+                    else if (data.status === "Rejected") {
+                        Swal.fire({
+                            icon: 'error',
+                            title: 'Application Rejected',
+                            text: 'Unfortunately, your application was not successful.',
+                        });
+                        document.getElementById("status").innerHTML =
+                            "Status: Rejected ";
+
+                        document.getElementById("matric").innerHTML = "";
+
+                        document.getElementById("message").innerHTML =
+                            "Unfortunately, your application was not successful.";
+
+                    }
+
+                }
+
+                if (!found) {
+
+                    Swal.fire({
+                        icon: 'error',
+                        title: 'Email Not Found',
+                        text: 'No application found for the provided email address.',
+                    });
+                    document.getElementById("result").style.display = "none";
+
+                }
+
+
+            });
+        });
+
+        // const text =
+        //     "Check your admission status and retrieve your matric number.";
+
+        // let index = 0;
+
+        // function typeWriter() {
+
+        //     if (index < text.length) {
+
+        //         document.getElementById("typing")
+        //             .innerHTML += text.charAt(index);
+
+        //         index++;
+
+        //         setTimeout(typeWriter, 50);
+        //     }
+
+        // }
+
+        // typeWriter();
+
+
+        // document
+        //     .getElementById("checkBtn")
+        //     .addEventListener("click", () => {
+
+        //         document
+        //             .getElementById("result")
+        //             .style.display = "block";
+
+        //     });
+
+    </script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+</body>
+
+</html>

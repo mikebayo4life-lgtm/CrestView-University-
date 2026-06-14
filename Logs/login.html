@@ -1,0 +1,276 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Student Login - Crestview University</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.13.1/font/bootstrap-icons.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', sans-serif;
+        }
+
+        body {
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background: linear-gradient(135deg, #001f3f, #003566, #00509d);
+        }
+
+        .login-box {
+            width: 400px;
+            background: white;
+            padding: 40px;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.25);
+        }
+
+        .logo {
+            text-align: center;
+            font-size: 1.5rem;
+            font-weight: bold;
+            color: #002147;
+            margin-bottom: 10px;
+        }
+
+        .logo span {
+            color: #f59e0b;
+        }
+
+        h2 {
+            text-align: center;
+            margin-bottom: 5px;
+            color: #002147;
+        }
+
+        p {
+            text-align: center;
+            color: #666;
+            font-size: 0.9rem;
+            margin-bottom: 25px;
+        }
+
+        .input-box {
+            margin-bottom: 18px;
+        }
+
+        label {
+            font-weight: 600;
+            display: block;
+            margin-bottom: 5px;
+            color: #333;
+        }
+
+        input {
+            width: 100%;
+            padding: 12px;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            outline: none;
+            transition: .3s;
+        }
+
+        input:focus {
+            border-color: #f59e0b;
+        }
+
+        button {
+            width: 100%;
+            padding: 12px;
+            background: #f59e0b;
+            border: none;
+            margin-top: 20px;
+            border-radius: 8px;
+            color: white;
+            font-weight: bold;
+            cursor: pointer;
+            transition: .3s;
+        }
+
+        button:hover {
+            background: #d97706;
+        }
+
+        .links {
+            text-align: center;
+            margin-top: 15px;
+            font-size: 0.9rem;
+        }
+
+        .links a {
+            color: #002147;
+            text-decoration: none;
+            font-weight: 600;
+        }
+
+        .links a:hover {
+            color: #f59e0b;
+        }
+
+        .password-box {
+            position: relative;
+            width: 100%;
+        }
+
+        .password-box input {
+            width: 100%;
+            padding: 12px;
+            padding-right: 45px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            outline: none;
+        }
+
+        .password-box input:focus {
+            border-color: #003366;
+        }
+
+        .password-box i {
+            position: absolute;
+            right: 15px;
+            top: 70%;
+            transform: translateY(-50%);
+            cursor: pointer;
+            color: #666;
+            font-size: 16px;
+        }
+
+        .password-box i:hover {
+            color: #003366;
+        }
+
+        @media (max-width: 450px) {
+            .login-box {
+                width: 90%;
+                padding: 25px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="login-box">
+
+        <div class="logo">
+            🎓 Crestview <span>University</span>
+        </div>
+
+        <h2>Student Login</h2>
+        <p>Login with your email and password</p>
+
+        <form id="loginForm">
+
+            <div class="input-box">
+                <label>Email Address</label>
+                <input id="email" type="email" placeholder="Enter your email">
+            </div>
+
+            <!-- <div class="input-box">
+                <label>Password</label>
+                <input id="password" type="password" placeholder="Enter your password" required>
+            </div> -->
+
+            <div class="password-box">
+                <label>Password</label>
+                <input type="password" id="password" placeholder="Password">
+
+                <i class="fa-solid fa-eye" id="togglePassword"></i>
+
+            </div>
+
+            <button type="submit">Login</button>
+
+        </form>
+
+        <div class="links">
+            <p>Don't have an account? <a href="apply.html">Apply Now</a></p>
+            <!-- <p><a href="#">Forgot Password?</a></p> -->
+        </div>
+
+    </div>
+
+
+    <script type="module">
+
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/12.14.0/firebase-app.js";
+
+        import { getFirestore } from "https://www.gstatic.com/firebasejs/12.14.0/firebase-firestore.js";
+
+        import { getAuth, signInWithEmailAndPassword } from "https://www.gstatic.com/firebasejs/12.14.0/firebase-auth.js";
+
+        const firebaseConfig = {
+            apiKey: "AIzaSyDjcNfeAoSv6l22eELrmnX82rs0Uh3TJ9I",
+            authDomain: "school-management-f7a54.firebaseapp.com",
+            projectId: "school-management-f7a54",
+            storageBucket: "school-management-f7a54.firebasestorage.app",
+            messagingSenderId: "333306723954",
+            appId: "1:333306723954:web:36b88533e53aee10128ceb"
+        };
+
+        const app = initializeApp(firebaseConfig);
+        const db = getFirestore(app);
+        const auth = getAuth(app);
+
+
+        const password = document.getElementById("password");
+        const togglePassword = document.getElementById("togglePassword");
+
+        togglePassword.addEventListener("click", () => {
+
+            if (password.type === "password") {
+
+                password.type = "text";
+                togglePassword.classList.remove("fa-eye");
+                togglePassword.classList.add("fa-eye-slash");
+
+            } else {
+
+                password.type = "password";
+                togglePassword.classList.remove("fa-eye-slash");
+                togglePassword.classList.add("fa-eye");
+
+            }
+
+        });
+
+
+
+        document.getElementById("loginForm").addEventListener("submit", async (e) => {
+            e.preventDefault();
+
+            const email = document.getElementById("email").value;
+            const password = document.getElementById("password").value;
+
+            await signInWithEmailAndPassword(auth, email, password)
+                .then((userCredential) => {
+                    // Signed in 
+                    const user = userCredential.user;
+                    console.log("Login successful:", user);
+                    // Redirect to dashboard or another page
+                })
+                .catch((error) => {
+                    const errorCode = error.code;
+                    const errorMessage = error.message;
+                    Swal.fire("Login failed: " + errorMessage);
+                    console.error("Login failed:", errorCode, errorMessage);
+                });
+
+
+                        window.location.href = "../Student/dashboard.html";
+        })
+
+
+
+    </script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+</body>
+
+</html>
