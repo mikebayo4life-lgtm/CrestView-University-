@@ -16,18 +16,23 @@
             font-family: 'Inter', sans-serif;
         }
 
+        html {
+            scroll-behavior: smooth;
+        }
+
         body {
             background: #f6f8fc;
             color: #1e293b;
         }
 
+        /* ================= NAVBAR ================= */
         header {
             position: fixed;
-            width: 100%;
             top: 0;
+            width: 100%;
             z-index: 999;
-            backdrop-filter: blur(12px);
-            background: rgba(0, 33, 71, 0.85);
+            background: rgba(0, 33, 71, 0.7);
+            backdrop-filter: blur(14px);
             display: flex;
             justify-content: space-between;
             align-items: center;
@@ -41,7 +46,6 @@
             gap: 10px;
             color: white;
             font-weight: 700;
-            letter-spacing: 0.5px;
         }
 
         .logo-box {
@@ -80,6 +84,7 @@
             font-weight: 600;
         }
 
+        /* ================= HERO ================= */
         .hero {
             height: 100vh;
             display: flex;
@@ -92,27 +97,39 @@
             overflow: hidden;
         }
 
-        .hero::before {
+        /* glowing orbs */
+        .hero::before,
+        .hero::after {
             content: "";
             position: absolute;
             width: 500px;
             height: 500px;
-            background: rgba(245, 158, 11, 0.15);
-            filter: blur(120px);
             border-radius: 50%;
-            top: -100px;
-            left: -100px;
+            filter: blur(120px);
+        }
+
+        .hero::before {
+            background: rgba(245, 158, 11, 0.18);
+            top: -120px;
+            left: -120px;
+        }
+
+        .hero::after {
+            background: rgba(59, 130, 246, 0.15);
+            bottom: -120px;
+            right: -120px;
         }
 
         .hero-text {
             max-width: 600px;
             z-index: 2;
+            animation: fadeUp 1s ease;
         }
 
         .hero-text h1 {
-            font-size: 3.5rem;
+            font-size: 3.8rem;
+            line-height: 1.1;
             margin-bottom: 20px;
-            line-height: 1.2;
         }
 
         .hero-text p {
@@ -121,6 +138,7 @@
             line-height: 1.7;
         }
 
+        /* buttons */
         .hero-btns {
             margin-top: 25px;
             display: flex;
@@ -143,6 +161,7 @@
 
         .primary:hover {
             transform: translateY(-3px);
+            box-shadow: 0 10px 25px rgba(245, 158, 11, 0.3);
         }
 
         .secondary {
@@ -150,6 +169,7 @@
             color: #002147;
         }
 
+        /* hero image */
         .hero-card {
             width: 420px;
             height: 420px;
@@ -157,38 +177,54 @@
             background-size: cover;
             background-position: center;
             border-radius: 25px;
-            box-shadow: 0 25px 60px rgba(0, 0, 0, 0.3);
+            box-shadow: 0 25px 60px rgba(0, 0, 0, 0.35);
             z-index: 2;
+            animation: fadeUp 1.2s ease;
         }
 
+        /* ================= SECTIONS ================= */
         section {
-            padding: 90px 8%;
+            padding: 100px 8%;
         }
 
         .title {
             text-align: center;
-            font-size: 2.2rem;
+            font-size: 2.4rem;
             color: #002147;
-            margin-bottom: 40px;
+            margin-bottom: 50px;
             font-weight: 700;
         }
 
+        /* ================= GRID ================= */
         .grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
-            gap: 22px;
+            gap: 24px;
         }
 
         .card {
             background: white;
             padding: 28px;
-            border-radius: 16px;
+            border-radius: 18px;
             box-shadow: 0 10px 30px rgba(0, 0, 0, 0.06);
             transition: 0.3s;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .card::before {
+            content: "";
+            position: absolute;
+            width: 100%;
+            height: 4px;
+            top: 0;
+            left: 0;
+            background: linear-gradient(90deg, #f59e0b, #002147);
         }
 
         .card:hover {
-            transform: translateY(-8px);
+            transform: translateY(-10px);
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.1);
         }
 
         .card h3 {
@@ -196,15 +232,18 @@
             margin-bottom: 10px;
         }
 
+        /* ================= STATS STRIP ================= */
         .strip {
             background: linear-gradient(90deg, #002147, #003566);
             color: white;
             text-align: center;
-            padding: 50px 8%;
+            padding: 60px 8%;
             font-weight: 600;
             font-size: 1.1rem;
+            letter-spacing: 0.5px;
         }
 
+        /* ================= FOOTER ================= */
         footer {
             background: #00152e;
             color: white;
@@ -212,6 +251,20 @@
             padding: 25px;
         }
 
+        /* ================= ANIMATION ================= */
+        @keyframes fadeUp {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* ================= MOBILE ================= */
         @media (max-width: 900px) {
 
             .hero {
@@ -220,23 +273,21 @@
                 gap: 40px;
             }
 
-            .hero-btns{
-                display: flex;
-                justify-content: center;
-            }
-
             .hero-text h1 {
-                font-size: 2.0rem;
-                font-weight: 500;
+                font-size: 2.3rem;
             }
 
             .hero-card {
-                width: 90%;
+                width: 100%;
                 height: 300px;
             }
 
             nav ul {
                 display: none;
+            }
+
+            .hero-btns {
+                justify-content: center;
             }
         }
     </style>
@@ -261,6 +312,7 @@
         </nav>
     </header>
 
+    <!-- HERO -->
     <section class="hero">
 
         <div class="hero-text">
@@ -280,69 +332,73 @@
 
     </section>
 
+    <!-- ABOUT -->
     <section id="about">
         <h2 class="title">Why Choose Crestview</h2>
 
         <div class="grid">
             <div class="card">
                 <h3>Global Standard</h3>
-                <p>We follow international academic standards and excellence.</p>
+                <p>We follow international academic excellence.</p>
             </div>
 
             <div class="card">
                 <h3>Expert Faculty</h3>
-                <p>Highly qualified lecturers and researchers across all faculties.</p>
+                <p>Highly qualified lecturers and researchers.</p>
             </div>
 
             <div class="card">
                 <h3>Modern Facilities</h3>
-                <p>Smart classrooms, labs, and digital learning systems.</p>
+                <p>Smart classrooms and advanced labs.</p>
             </div>
         </div>
     </section>
 
+    <!-- ADMISSION -->
     <section id="admission">
         <h2 class="title">Admission Process</h2>
 
         <div class="grid">
             <div class="card">
-                <h3>1. Apply Online</h3>
-                <p>Fill the application form on our portal.</p>
+                <h3>Apply Online</h3>
+                <p>Complete your application in minutes.</p>
             </div>
 
             <div class="card">
-                <h3>2. Review</h3>
-                <p>Your application is reviewed by our admissions team.</p>
+                <h3>Review</h3>
+                <p>We carefully evaluate every applicant.</p>
             </div>
 
             <div class="card">
-                <h3>3. Admission</h3>
-                <p>Get your admission letter and matric number.</p>
+                <h3>Admission</h3>
+                <p>Receive your admission letter.</p>
             </div>
         </div>
     </section>
 
+    <!-- SERVICES -->
     <section id="services">
         <h2 class="title">Student Services</h2>
 
         <div class="grid">
             <div class="card">
                 <h3>Apply Online</h3>
-                <p>Start your academic journey instantly.</p>
+                <p>Start your journey today.</p>
             </div>
 
             <div class="card">
                 <h3>Track Status</h3>
-                <p>Check your admission progress anytime.</p>
+                <p>Monitor your admission progress.</p>
             </div>
 
             <div class="card">
                 <h3>Student Portal</h3>
-                <p>Access academic records and updates.</p>
+                <p>Access academic records anytime.</p>
             </div>
         </div>
     </section>
 
+    <!-- STRIP -->
     <div class="strip">
         10,000+ Students • 150+ Faculty • 95% Success Rate • 20+ Years Excellence
     </div>
