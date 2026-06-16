@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Student Login - Crestview University</title>
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.13.1/font/bootstrap-icons.min.css">
+
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
 
     <style>
@@ -16,28 +16,38 @@
             font-family: 'Segoe UI', sans-serif;
         }
 
-        body {
-            height: 100vh;
+       body {
+            min-height: 100vh;
+            background:
+                linear-gradient(rgba(10, 35, 66, .85),
+                    rgba(10, 35, 66, .85)),
+                url("https://images.unsplash.com/photo-1562774053-701939374585?auto=format&fit=crop&w=1600&q=80");
+            background-size: cover;
+            background-position: center;
             display: flex;
             justify-content: center;
             align-items: center;
-            background: linear-gradient(135deg, #001f3f, #003566, #00509d);
+            padding: 20px;
         }
-
         .login-box {
-            width: 400px;
-            background: white;
-            padding: 40px;
-            border-radius: 15px;
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.25);
+            width: 420px;
+            padding: 45px;
+            border-radius: 18px;
+            background: rgba(255, 255, 255, 0.08);
+            backdrop-filter: blur(18px);
+            -webkit-backdrop-filter: blur(18px);
+            border: 1px solid rgba(255, 255, 255, 0.15);
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.6);
+            z-index: 2;
+            color: white;
         }
 
         .logo {
             text-align: center;
-            font-size: 1.5rem;
-            font-weight: bold;
-            color: #002147;
+            font-size: 1.4rem;
+            font-weight: 700;
             margin-bottom: 10px;
+            color: #fff;
         }
 
         .logo span {
@@ -46,13 +56,14 @@
 
         h2 {
             text-align: center;
-            margin-bottom: 5px;
-            color: #002147;
+            margin-top: 10px;
+            color: #ffffff;
+            font-size: 1.6rem;
         }
 
         p {
             text-align: center;
-            color: #666;
+            color: rgba(255, 255, 255, 0.7);
             font-size: 0.9rem;
             margin-bottom: 25px;
         }
@@ -64,108 +75,102 @@
         label {
             font-weight: 600;
             display: block;
-            margin-bottom: 5px;
-            color: #333;
+            margin-bottom: 6px;
+            color: rgba(255, 255, 255, 0.85);
+            font-size: 0.85rem;
         }
 
         input {
             width: 100%;
-            padding: 12px;
-            border: 1px solid #ddd;
-            border-radius: 8px;
+            padding: 13px;
+            border-radius: 10px;
+            border: 1px solid rgba(255, 255, 255, 0.15);
+            background: rgba(255, 255, 255, 0.06);
+            color: white;
             outline: none;
-            transition: .3s;
+            transition: 0.3s;
         }
 
         input:focus {
             border-color: #f59e0b;
+            box-shadow: 0 0 12px rgba(245, 158, 11, 0.3);
+        }
+
+        input::placeholder {
+            color: rgba(255, 255, 255, 0.4);
+        }
+
+        .password-box {
+            position: relative;
+        }
+
+        .password-box i {
+            position: absolute;
+            right: 12px;
+            top: 50%;
+            transform: translateY(-50%);
+            cursor: pointer;
+            color: rgba(255, 255, 255, 0.6);
+            transition: 0.3s;
+        }
+
+        .password-box i:hover {
+            color: #f59e0b;
         }
 
         button {
             width: 100%;
-            padding: 12px;
-            background: #f59e0b;
+            padding: 13px;
+            margin-top: 18px;
             border: none;
-            margin-top: 20px;
-            border-radius: 8px;
+            border-radius: 10px;
+            background: linear-gradient(135deg, #f59e0b, #d97706);
             color: white;
-            font-weight: bold;
+            font-weight: 700;
             cursor: pointer;
-            transition: .3s;
+            transition: 0.3s;
+            box-shadow: 0 10px 25px rgba(245, 158, 11, 0.25);
         }
 
         button:hover {
-            background: #d97706;
+            transform: translateY(-2px);
+            box-shadow: 0 15px 30px rgba(245, 158, 11, 0.35);
         }
 
         .links {
             text-align: center;
             margin-top: 15px;
-            font-size: 0.9rem;
+            font-size: 0.85rem;
+            color: rgba(255, 255, 255, 0.7);
         }
 
         .links a {
-            color: #002147;
+            color: #f59e0b;
             text-decoration: none;
             font-weight: 600;
         }
 
         .links a:hover {
-            color: #f59e0b;
-        }
-
-        .password-box {
-            position: relative;
-            width: 100%;
-        }
-
-        .password-box input {
-            width: 100%;
-            padding: 12px;
-            padding-right: 45px;
-            border: 1px solid #ccc;
-            border-radius: 5px;
-            outline: none;
-        }
-
-        .password-box input:focus {
-            border-color: #003366;
-        }
-
-        .password-box i {
-            position: absolute;
-            right: 15px;
-            top: 70%;
-            transform: translateY(-50%);
-            cursor: pointer;
-            color: #666;
-            font-size: 16px;
-        }
-
-        .password-box i:hover {
-            color: #003366;
+            text-decoration: underline;
         }
 
         @media (max-width: 450px) {
             .login-box {
-                width: 90%;
-                padding: 25px;
+                width: 92%;
+                padding: 30px;
             }
         }
     </style>
 </head>
 
 <body>
-  
+
     <div class="login-box">
 
-
-        <div class="logo">
-            🎓 Crestview <span>University</span>
-        </div>
+        <div class="logo">🎓 Crestview <span>University</span></div>
 
         <h2>Student Login</h2>
-        <p>Login with your email and password</p>
+        <p>Sign in with your email and password</p>
 
         <form id="loginForm">
 
@@ -174,17 +179,10 @@
                 <input id="email" type="email" placeholder="Enter your email" required>
             </div>
 
-            <!-- <div class="input-box">
+            <div class="input-box password-box">
                 <label>Password</label>
                 <input id="password" type="password" placeholder="Enter your password" required>
-            </div> -->
-
-            <div class="password-box">
-                <label>Password</label>
-                <input type="password" id="password" placeholder="Password" required>
-
                 <i class="fa-solid fa-eye" id="togglePassword"></i>
-
             </div>
 
             <button type="submit">Login</button>
@@ -193,18 +191,13 @@
 
         <div class="links">
             <p>Don't have an account? <a href="apply.html">Apply Now</a></p>
-            <!-- <p><a href="#">Forgot Password?</a></p> -->
         </div>
 
     </div>
 
-
     <script type="module">
-
         import { initializeApp } from "https://www.gstatic.com/firebasejs/12.14.0/firebase-app.js";
-
         import { getFirestore } from "https://www.gstatic.com/firebasejs/12.14.0/firebase-firestore.js";
-
         import { getAuth, signInWithEmailAndPassword } from "https://www.gstatic.com/firebasejs/12.14.0/firebase-auth.js";
 
         const firebaseConfig = {
@@ -217,60 +210,39 @@
         };
 
         const app = initializeApp(firebaseConfig);
-        const db = getFirestore(app);
         const auth = getAuth(app);
-
 
         const password = document.getElementById("password");
         const togglePassword = document.getElementById("togglePassword");
 
         togglePassword.addEventListener("click", () => {
-
             if (password.type === "password") {
-
                 password.type = "text";
-                togglePassword.classList.remove("fa-eye");
-                togglePassword.classList.add("fa-eye-slash");
-
+                togglePassword.classList.replace("fa-eye", "fa-eye-slash");
             } else {
-
                 password.type = "password";
-                togglePassword.classList.remove("fa-eye-slash");
-                togglePassword.classList.add("fa-eye");
-
+                togglePassword.classList.replace("fa-eye-slash", "fa-eye");
             }
-
         });
-
-
 
         document.getElementById("loginForm").addEventListener("submit", async (e) => {
             e.preventDefault();
 
             const email = document.getElementById("email").value;
-            const password = document.getElementById("password").value;
+            const pass = document.getElementById("password").value;
 
-            await signInWithEmailAndPassword(auth, email, password)
-                .then((userCredential) => {
-                    // Signed in 
-                    const user = userCredential.user;
-                    console.log("Login successful:", user);
-                    // Redirect to dashboard or another page
-                })
-                .catch((error) => {
-                    const errorCode = error.code;
-                    const errorMessage = error.message;
-                    Swal.fire("Login failed: " + errorMessage);
-                    console.error("Login failed:", errorCode, errorMessage);
-                });
+            try {
+                await signInWithEmailAndPassword(auth, email, pass);
 
+                window.location.href = "../Student/dashboard.html";
 
-            window.location.href = "../Student/dashboard.html";
-        })
-
-
-
+            } catch (error) {
+                Swal.fire("Login failed", error.message, "error");
+                console.error(error);
+            }
+        });
     </script>
+
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 </body>
 
