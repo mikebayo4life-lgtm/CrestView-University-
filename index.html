@@ -163,6 +163,20 @@
             padding: 6px 14px;
             border-radius: 3px;
             margin-bottom: 22px;
+            min-height: 28px;
+        }
+
+        /* cursor effect */
+        .typewriter::after {
+            content: "|";
+            animation: blink 0.7s infinite;
+            margin-left: 2px;
+        }
+
+        @keyframes blink {
+            50% {
+                opacity: 0;
+            }
         }
 
         .hero h1 {
@@ -425,7 +439,7 @@
                 gap: 20px;
             }
 
-            .about-img{
+            .about-img {
                 /* height: 160px; */
             }
 
@@ -719,7 +733,8 @@
             nav ul {
                 display: none;
             }
-            .nav-toggle{
+
+            .nav-toggle {
                 padding-left: 30%;
             }
         }
@@ -833,7 +848,9 @@
     <!-- HERO -->
     <section class="hero">
         <div class="hero-inner">
-            <span class="hero-badge">Welcome to Crestview University</span>
+            <span class="hero-badge">
+                <span class="typewriter" id="typewriter"></span>
+            </span>
             <h1>Where <span>Excellence</span> Meets<br>Innovation</h1>
             <p>Crestview University empowers students with world-class education, modern research facilities, and global
                 opportunities for success. Rooted in integrity, driven by excellence.</p>
@@ -1036,6 +1053,22 @@
         navToggle.addEventListener('click', () => {
             nav.classList.toggle('open');
         });
+
+        // TYPEWRITER EFFECT
+        const text = "Welcome to Crestview University";
+        const typewriter = document.getElementById("typewriter");
+
+        let i = 0;
+
+        function typeEffect() {
+            if (i < text.length) {
+                typewriter.textContent += text.charAt(i);
+                i++;
+                setTimeout(typeEffect, 80);
+            }
+        }
+
+        typeEffect();
     </script>
 </body>
 
