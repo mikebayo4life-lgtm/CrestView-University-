@@ -68,6 +68,7 @@
             border: none;
             background: transparent;
             padding: 12px;
+            padding-left: 54%;
             cursor: pointer;
             margin-left: 10px;
         }
@@ -312,7 +313,6 @@
             max-width: 580px;
         }
 
-        /* ── ABOUT ── */
         .about {
             background: #fff;
         }
@@ -320,33 +320,48 @@
         .about-inner {
             display: grid;
             grid-template-columns: 1fr 1fr;
-            gap: 70px;
+            gap: 60px;
             align-items: center;
         }
 
+        /* IMAGE CONTAINER */
         .about-img {
-            width: 100%;
-            height: 440px;
-            border-radius: 6px;
-            object-fit: cover;
-            background: url('https://images.unsplash.com/photo-1523050854058-8df90110c9f1?auto=format&fit=crop&w=900&q=80') center/cover;
             position: relative;
+            width: 100%;
         }
 
+        .about-img img {
+            width: 100%;
+            /* height: 420px; */
+            object-fit: cover;
+            border-radius: 8px;
+            display: block;
+            position: relative;
+            z-index: 2;
+        }
+
+        /* GOLD BORDER EFFECT */
         .about-img::after {
-            content: '';
+            content: "";
             position: absolute;
-            bottom: -18px;
-            right: -18px;
+            top: 18px;
+            left: 18px;
             width: 100%;
             height: 100%;
-            border: 4px solid gold;
-            border-radius: 6px;
-            z-index: -1;
+            border: 4px solid #f7c210;
+            border-radius: 8px;
+            z-index: 1;
         }
 
+        /* CONTENT */
+        .about-content {
+            display: flex;
+            flex-direction: column;
+        }
+
+        /* POINTS */
         .about-points {
-            margin-top: 28px;
+            margin-top: 25px;
             display: flex;
             flex-direction: column;
             gap: 14px;
@@ -354,22 +369,105 @@
 
         .about-point {
             display: flex;
+            gap: 12px;
             align-items: flex-start;
-            gap: 14px;
         }
 
         .about-point .dot {
-            min-width: 10px;
+            width: 10px;
             height: 10px;
             background: #f7c210;
             border-radius: 50%;
             margin-top: 6px;
+            flex-shrink: 0;
         }
 
         .about-point p {
-            color: #444;
             font-size: 0.95rem;
+            color: #444;
             line-height: 1.6;
+        }
+
+        /* RESPONSIVE */
+        @media (max-width: 900px) {
+            .about-inner {
+                grid-template-columns: 1fr;
+                gap: 40px;
+            }
+
+            .about-img {
+                margin: auto;
+                /* width: 500px; */
+            }
+
+            .about-img img {
+                /* margin: auto; */
+                /* display: flex; */
+                /* justify-content: center; */
+                /* width: 300px; */
+                /* align-items: center; */
+                height: 300px;
+            }
+
+            .about-img::after {
+                display: none;
+            }
+        }
+
+        @media (max-width: 300px) {
+
+            .about {
+                padding: 50px 14px;
+            }
+
+            .about-inner {
+                grid-template-columns: 1fr;
+                gap: 20px;
+            }
+
+            .about-img{
+                /* height: 160px; */
+            }
+
+            .about-img img {
+                height: 160px;
+                border-radius: 6px;
+            }
+
+            .about-img::after {
+                display: none;
+            }
+
+            .section-label {
+                font-size: 10px;
+                letter-spacing: 1px;
+            }
+
+            .section-title {
+                font-size: 1.2rem;
+                line-height: 1.3;
+            }
+
+            .section-sub {
+                font-size: 0.85rem;
+                line-height: 1.5;
+            }
+
+            .about-points {
+                gap: 10px;
+                margin-top: 15px;
+            }
+
+            .about-point p {
+                font-size: 0.82rem;
+                line-height: 1.4;
+            }
+
+            .about-point .dot {
+                width: 7px;
+                height: 7px;
+                margin-top: 5px;
+            }
         }
 
         /* ── STATS STRIP ── */
@@ -588,6 +686,10 @@
                 padding: 16px 20px;
             }
 
+            .about-img {
+                width: 300px;
+            }
+
             .quick-strip {
                 grid-template-columns: 1fr;
             }
@@ -616,6 +718,86 @@
 
             nav ul {
                 display: none;
+            }
+        }
+
+        /* Very small screens */
+        @media (max-width: 300px) {
+            header {
+                padding: 0 8px;
+            }
+
+            .logo {
+                font-size: 0.95rem;
+                gap: 8px;
+            }
+
+            .logo-box {
+                width: 36px;
+                height: 36px;
+                font-size: 0.9rem;
+            }
+
+            .nav-toggle {
+                padding: 8px;
+            }
+
+            nav ul {
+                display: none;
+            }
+
+            nav.open ul {
+                display: flex;
+            }
+
+            nav.open ul li a {
+                padding: 12px 16px;
+                font-size: 13px;
+            }
+
+            .btn-login {
+                padding: 12px 10px !important;
+                font-size: 13px;
+            }
+
+            .hero {
+                padding: 100px 6% 60px;
+            }
+
+            .hero h1 {
+                font-size: 1.6rem;
+            }
+
+            .hero p {
+                font-size: 0.95rem;
+            }
+
+            .hero-inner {
+                max-width: 100%;
+            }
+
+            .about-img {
+                height: 200px;
+            }
+
+            .about-point .dot {
+                min-width: 8px;
+                height: 8px;
+            }
+
+            .about-inner {
+                gap: 28px;
+                grid-template-columns: 1fr;
+            }
+
+            .stats-strip {
+                grid-template-columns: 1fr;
+                padding: 30px 6%;
+            }
+
+            .footer-top {
+                padding: 40px 6%;
+                grid-template-columns: 1fr;
             }
         }
     </style>
@@ -684,38 +866,46 @@
     <!-- ABOUT -->
     <section class="about" id="about">
         <div class="about-inner">
+
             <div class="about-img">
-                <img src="./Multimedia/logo.png.png" alt="#crestviewuniversity" width="500px">
+                <img src="./Multimedia/logo.png.png" alt="Students on campus">
             </div>
-            <div>
+
+            <div class="about-content">
                 <span class="section-label">About Us</span>
                 <h2 class="section-title">A Legacy of Academic Excellence</h2>
-                <p class="section-sub">Crestview University is committed to producing graduates of distinction —
-                    combining rigorous academics with strong values, global outlook, and a passion for impacting
-                    society.</p>
+
+                <p class="section-sub">
+                    Crestview University is committed to producing graduates of distinction — combining rigorous
+                    academics with strong values, global outlook, and a passion for impacting society.
+                </p>
+
                 <div class="about-points">
                     <div class="about-point">
                         <span class="dot"></span>
                         <p><strong>Global Standard Curricula</strong> — programmes benchmarked against world-class
                             institutions and accredited by national bodies.</p>
                     </div>
+
                     <div class="about-point">
                         <span class="dot"></span>
                         <p><strong>Expert Faculty</strong> — highly qualified lecturers, researchers, and industry
                             practitioners guiding every student.</p>
                     </div>
+
                     <div class="about-point">
                         <span class="dot"></span>
                         <p><strong>Modern Facilities</strong> — smart classrooms, advanced laboratories, and a
-                            well-stocked library for 21st-century learning.</p>
+                            well-stocked library.</p>
                     </div>
+
                     <div class="about-point">
                         <span class="dot"></span>
-                        <p><strong>Holistic Development</strong> — sport, culture, faith, and community programmes to
-                            nurture the complete student.</p>
+                        <p><strong>Holistic Development</strong> — sports, culture, faith, and leadership training.</p>
                     </div>
                 </div>
             </div>
+
         </div>
     </section>
 
