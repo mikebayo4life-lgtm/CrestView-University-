@@ -2,222 +2,249 @@
 <html lang="en">
 
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Applications | Crestview University</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Applications | Crestview University</title>
 
-<style>
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap');
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=Inter:wght@300;400;500;600&display=swap');
 
-* {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-    font-family: 'Inter', sans-serif;
-}
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Inter', sans-serif;
+        }
 
-body {
-    background: #f5f7fb;
-    display: flex;
-    color: #1e293b;
-}
+        body {
+            background: #f5f0e8;
+            display: flex;
+            color: #1e293b;
+        }
 
-.sidebar {
-    width: 260px;
-    height: 100vh;
-    background: linear-gradient(180deg, #002147, #00152e);
-    color: white;
-    padding: 25px;
-    position: fixed;
-    box-shadow: 10px 0 30px rgba(0,0,0,0.15);
-}
+        .sidebar {
+            width: 220px;
+            height: 100vh;
+            background: #001a3a;
+            color: white;
+            padding: 28px 18px;
+            position: fixed;
+            border-right: 1px solid #c9a84c33;
+        }
 
-.sidebar h2 {
-    text-align: center;
-    margin-bottom: 35px;
-    padding-bottom: 15px;
-    border-bottom: 1px solid rgba(255,255,255,0.1);
-    font-size: 20px;
-    letter-spacing: 1px;
-}
+        .sidebar h2 {
+            font-family: 'Playfair Display', serif;
+            text-align: center;
+            margin-bottom: 20px;
+            padding-bottom: 18px;
+            border-bottom: 1px solid #c9a84c33;
+            font-size: 18px;
+            letter-spacing: 0.5px;
+            color: #c9a84c;
+        }
 
-.sidebar a {
-    display: block;
-    color: white;
-    text-decoration: none;
-    padding: 12px 14px;
-    margin-bottom: 10px;
-    border-radius: 10px;
-    font-size: 14px;
-    transition: 0.3s;
-}
+        .sidebar a {
+            display: block;
+            color: #a8c4dc;
+            text-decoration: none;
+            padding: 10px 12px;
+            margin-bottom: 4px;
+            border-radius: 8px;
+            font-size: 13px;
+            font-weight: 400;
+            transition: 0.2s;
+        }
 
-.sidebar a:hover {
-    background: rgba(245, 158, 11, 0.15);
-    color: #f59e0b;
-    transform: translateX(5px);
-}
+        .sidebar a:hover {
+            background: #c9a84c14;
+            color: #c9a84c;
+            transform: translateX(4px);
+        }
 
-.main {
-    margin-left: 260px;
-    width: calc(100% - 260px);
-    padding: 25px;
-}
+        .main {
+            margin-left: 220px;
+            width: calc(100% - 220px);
+            padding: 0;
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+        }
 
-.topbar {
-    background: rgba(255,255,255,0.8);
-    backdrop-filter: blur(10px);
-    padding: 18px 22px;
-    border-radius: 14px;
-    box-shadow: 0 10px 25px rgba(0,0,0,0.05);
-    margin-bottom: 20px;
-    border: 1px solid rgba(0,0,0,0.05);
-}
+        .topbar {
+            background: #001a3a;
+            padding: 18px 26px;
+            border-bottom: 2px solid #c9a84c;
+            margin-bottom: 0;
+        }
 
-.topbar h1 {
-    color: #002147;
-    font-size: 22px;
-}
+        .topbar h1 {
+            font-family: 'Playfair Display', serif;
+            color: #ffffff;
+            font-size: 20px;
+            font-weight: 600;
+            letter-spacing: 0.3px;
+        }
 
-.table-box {
-    background: white;
-    padding: 22px;
-    border-radius: 18px;
-    box-shadow: 0 15px 35px rgba(0,0,0,0.06);
-    overflow-x: auto;
-}
+        .content-area {
+            padding: 24px;
+        }
 
-.table-box h2 {
-    margin-bottom: 15px;
-    color: #002147;
-}
+        .table-box {
+            background: white;
+            border-radius: 12px;
+            border: 1px solid #c9a84c33;
+            overflow: hidden;
+            box-shadow: none;
+        }
 
-table {
-    width: 100%;
-    border-collapse: collapse;
-    min-width: 600px;
-}
+        .table-box h2 {
+            font-family: 'Playfair Display', serif;
+            color: #001a3a;
+            font-size: 16px;
+            font-weight: 600;
+            padding: 16px 20px 14px;
+            border-bottom: 1px solid #e8dfc8;
+            background: #fdfaf4;
+        }
 
-th {
-    background: #002147;
-    color: white;
-    padding: 14px;
-    font-size: 14px;
-}
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            min-width: 600px;
+        }
 
-td {
-    padding: 14px;
-    text-align: center;
-    border-bottom: 1px solid #eee;
-    font-size: 14px;
-}
+        th {
+            background: #001a3a;
+            color: #c9a84c;
+            padding: 12px 16px;
+            font-size: 11px;
+            font-weight: 600;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            text-align: left;
+        }
 
-tr:hover {
-    background: #f8fafc;
-}
+        td {
+            padding: 13px 16px;
+            text-align: left;
+            border-bottom: 1px solid #f0e8d8;
+            font-size: 13px;
+            color: #374151;
+            vertical-align: middle;
+        }
 
-button {
-    border: none;
-    padding: 8px 14px;
-    border-radius: 8px;
-    cursor: pointer;
-    font-weight: 600;
-    font-size: 13px;
-    transition: 0.3s;
-}
+        tr:last-child td {
+            border-bottom: none;
+        }
 
-.approve {
-    background: #16a34a;
-    color: white;
-}
+        tr:hover td {
+            background: #fdfaf4;
+        }
 
-.reject {
-    background: #dc2626;
-    color: white;
-}
+        button {
+            border: none;
+            padding: 6px 14px;
+            border-radius: 6px;
+            cursor: pointer;
+            font-weight: 600;
+            font-size: 12px;
+            letter-spacing: 0.3px;
+            transition: 0.2s;
+        }
 
-button:hover {
-    transform: scale(1.05);
-    opacity: 0.9;
-}
+        button:hover {
+            transform: translateY(-1px);
+            opacity: 0.85;
+        }
 
-@media (max-width: 768px) {
+        .approve {
+            background: linear-gradient(135deg, #c9a84c, #e8c96a);
+            color: #001a3a;
+        }
 
-body {
-    flex-direction: column;
-}
+        .reject {
+            background: #001a3a;
+            color: #c9a84c;
+            border: 1px solid #c9a84c44;
+        }
 
-.sidebar {
-    width: 100%;
-    height: auto;
-    position: relative;
-    text-align: center;
-}
+        @media (max-width: 768px) {
+            body {
+                flex-direction: column;
+            }
 
-.sidebar a {
-    display: inline-block;
-    margin: 5px;
-}
+            .sidebar {
+                width: 100%;
+                height: auto;
+                position: relative;
+                text-align: center;
+            }
 
-.main {
-    width: 100%;
-    margin-left: 0;
-}
+            .sidebar a {
+                display: inline-block;
+                margin: 5px;
+            }
 
-table {
-    font-size: 12px;
-}
-}
+            .main {
+                width: 100%;
+                margin-left: 0;
+            }
 
-</style>
+            table {
+                font-size: 12px;
+            }
+        }
+    </style>
 </head>
 
 <body>
 
-<div class="sidebar">
-    <h2>CU Admin</h2>
+    <div class="sidebar">
+        <h2>CU Admin</h2>
 
-    <a href="dashboard.html">Dashboard</a>
-    <a href="applications.html">Applications</a>
-    <a href="students.html">Students</a>
-    <a href="results.html">Results</a>
-    <a href="../login.html">Logout</a>
-</div>
-
-<div class="main">
-
-    <div class="topbar">
-        <h1>Applications Management</h1>
+        <a href="dashboard.html">Dashboard</a>
+        <a href="applications.html">Applications</a>
+        <a href="students.html">Students</a>
+        <a href="results.html">Results</a>
+        <a href="./courses.html">Course Registration</a>
+        <a href="../login.html">Logout</a>
     </div>
 
-    <div class="table-box">
+    <div class="main">
 
-        <h2>All Applications</h2>
+        <div class="topbar">
+            <h1>Applications Management</h1>
+        </div>
 
-        <table>
+        <div class="table-box">
 
-            <thead>
-                <tr>
-                    <th>Name</th>
-                    <th>Email</th>
-                    <th>Programme</th>
-                    <th>Status</th>
-                    <th>Action</th>
-                </tr>
-            </thead>
+            <h2>All Applications</h2>
 
-            <tbody id="applicationTable">
+            <table>
 
-            </tbody>
+                <thead>
+                    <tr>
+                        <th>Name</th>
+                        <th>Email</th>
+                        <th>Programme</th>
+                        <th>Status</th>
+                        <th>Action</th>
+                    </tr>
+                </thead>
 
-        </table>
+                <tbody id="applicationTable">
+
+                </tbody>
+
+            </table>
+
+        </div>
 
     </div>
 
-</div>
-
-<script type="module" src="./applications.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script type="module" src="./applications.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
 </body>
+
 </html>

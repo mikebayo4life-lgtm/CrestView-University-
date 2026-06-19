@@ -1,0 +1,532 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Course Registration</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500;600;700&family=Inter:wght@300;400;500;600&display=swap"
+        rel="stylesheet">
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Inter', 'Segoe UI', sans-serif;
+        }
+
+        body {
+            background: #07111f;
+            display: flex;
+            min-height: 100vh;
+        }
+
+        /* ── Sidebar ── */
+        .sidebar {
+            width: 260px;
+            height: 100vh;
+            background: linear-gradient(180deg, #080f1f 0%, #0d1a35 60%, #0a1528 100%);
+            color: white;
+            padding: 32px 20px;
+            position: fixed;
+            border-right: 1px solid rgba(201, 151, 0, 0.15);
+        }
+
+        .sidebar::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 2px;
+            background: linear-gradient(90deg, transparent, #C99700, transparent);
+        }
+
+        .sidebar h2 {
+            text-align: center;
+            margin-bottom: 36px;
+            font-family: 'Playfair Display', serif;
+            font-size: 20px;
+            font-weight: 600;
+            letter-spacing: 0.04em;
+            color: #e8c84a;
+        }
+
+        .sidebar a {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            color: rgba(255, 255, 255, 0.65);
+            text-decoration: none;
+            padding: 12px 16px;
+            margin-bottom: 4px;
+            border-radius: 10px;
+            font-size: 14px;
+            transition: all 0.25s ease;
+            border: 1px solid transparent;
+        }
+
+        .sidebar a:hover,
+        .sidebar a.active {
+            background: rgba(201, 151, 0, 0.1);
+            border-color: rgba(201, 151, 0, 0.3);
+            color: #e8c84a;
+        }
+
+        /* ── Main ── */
+        .main {
+            margin-left: 260px;
+            width: calc(100% - 260px);
+            padding: 36px 40px;
+        }
+
+        .topbar {
+            background: rgba(255, 255, 255, 0.03);
+            padding: 22px 28px;
+            border-radius: 16px;
+            border: 1px solid rgba(201, 151, 0, 0.12);
+            margin-bottom: 30px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .topbar h1 {
+            color: #e8c84a;
+            font-family: 'Playfair Display', serif;
+            font-size: 24px;
+            font-weight: 600;
+        }
+
+        .topbar .programme-tag {
+            font-size: 12px;
+            font-weight: 600;
+            letter-spacing: 0.08em;
+            text-transform: uppercase;
+            color: rgba(201, 151, 0, 0.7);
+        }
+
+        /* ── Card ── */
+        .card {
+            background: rgba(255, 255, 255, 0.02);
+            border-radius: 20px;
+            border: 1px solid rgba(201, 151, 0, 0.18);
+            overflow: hidden;
+        }
+
+        .card-header {
+            padding: 24px 28px;
+            border-bottom: 1px solid rgba(201, 151, 0, 0.12);
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .card-header h3 {
+            font-family: 'Playfair Display', serif;
+            color: #fff;
+            font-size: 18px;
+            font-weight: 600;
+        }
+
+        .credit-summary {
+            font-size: 13px;
+            color: rgba(216, 220, 232, 0.7);
+        }
+
+        .credit-summary span {
+            color: #e8c84a;
+            font-weight: 700;
+            font-size: 15px;
+        }
+
+        /* ── Course list ── */
+        .course-list {
+            padding: 8px 0;
+        }
+
+        .course-item {
+            display: flex;
+            align-items: center;
+            gap: 18px;
+            padding: 16px 28px;
+            border-bottom: 1px solid rgba(201, 151, 0, 0.06);
+            transition: background 0.2s ease;
+        }
+
+        .course-item:last-child {
+            border-bottom: none;
+        }
+
+        .course-item:hover {
+            background: rgba(201, 151, 0, 0.04);
+        }
+
+        .course-item input[type="checkbox"] {
+            width: 20px;
+            height: 20px;
+            accent-color: #C99700;
+            cursor: pointer;
+            flex-shrink: 0;
+        }
+
+        .course-info {
+            flex: 1;
+            display: flex;
+            align-items: center;
+            gap: 16px;
+        }
+
+        .course-code {
+            color: #e8c84a;
+            font-weight: 700;
+            font-size: 14px;
+            width: 50px;
+            flex-shrink: 0;
+        }
+
+        .course-name {
+            color: #e8eaf2;
+            font-size: 14px;
+            font-weight: 500;
+            flex: 1;
+        }
+
+        .course-credits {
+            font-size: 12px;
+            color: rgba(216, 220, 232, 0.5);
+            background: rgba(255, 255, 255, 0.03);
+            padding: 4px 10px;
+            border-radius: 8px;
+            flex-shrink: 0;
+        }
+
+        .registered-badge {
+            font-size: 11px;
+            font-weight: 600;
+            letter-spacing: 0.06em;
+            text-transform: uppercase;
+            color: #9fe1cb;
+            background: rgba(159, 225, 203, 0.1);
+            padding: 4px 10px;
+            border-radius: 8px;
+        }
+
+        /* ── Footer action ── */
+        .card-footer {
+            padding: 20px 28px;
+            border-top: 1px solid rgba(201, 151, 0, 0.12);
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 20px;
+        }
+
+        button {
+            padding: 13px 28px;
+            background: linear-gradient(135deg, #e8c84a, #b9860a);
+            border: none;
+            border-radius: 10px;
+            color: #1a1300;
+            font-size: 14px;
+            font-weight: 600;
+            letter-spacing: 0.03em;
+            cursor: pointer;
+            transition: transform 0.15s ease, box-shadow 0.15s ease;
+            white-space: nowrap;
+        }
+
+        button:hover {
+            transform: translateY(-1px);
+            box-shadow: 0 6px 18px rgba(201, 151, 0, 0.25);
+        }
+
+        button:disabled {
+            opacity: 0.4;
+            cursor: not-allowed;
+            transform: none;
+            box-shadow: none;
+        }
+
+        .status-msg {
+            font-size: 13px;
+            flex: 1;
+            text-align: right;
+        }
+
+        .status-msg.success {
+            color: #9fe1cb;
+        }
+
+        .status-msg.error {
+            color: #f0997b;
+        }
+
+        /* ── Locked state ── */
+        .locked-banner {
+            margin-bottom: 24px;
+            padding: 16px 24px;
+            background: linear-gradient(135deg, rgba(159, 225, 203, 0.08), rgba(159, 225, 203, 0.03));
+            border: 1px solid rgba(159, 225, 203, 0.25);
+            border-radius: 14px;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            font-size: 14px;
+            color: #9fe1cb;
+        }
+
+        .empty-state {
+            padding: 50px 28px;
+            text-align: center;
+            color: rgba(216, 220, 232, 0.4);
+            font-size: 14px;
+        }
+
+        @media (max-width: 768px) {
+            body {
+                flex-direction: column;
+            }
+
+            .sidebar {
+                width: 100%;
+                height: auto;
+                position: relative;
+            }
+
+            .main {
+                margin-left: 0;
+                width: 100%;
+                padding: 20px;
+            }
+
+            .course-info {
+                flex-wrap: wrap;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="sidebar">
+        <h2>Student Portal</h2>
+        <a href="dashboard.html">Dashboard</a>
+        <a href="profile.html">Profile</a>
+        <a href="register.html" class="active">Course Registration</a>
+        <a href="results.html">Results</a>
+    </div>
+
+    <div class="main">
+        <div class="topbar">
+            <h1>Course Registration</h1>
+            <span class="programme-tag" id="programmeTag">Loading...</span>
+        </div>
+
+        <div class="locked-banner" id="lockedBanner" style="display:none;">
+            ✓ You have already registered your courses for this session. Contact admin if you need changes.
+        </div>
+
+        <div class="card">
+            <div class="card-header">
+                <h3>Available courses</h3>
+                <div class="credit-summary">Selected credits: <span id="creditTotal">0</span></div>
+            </div>
+
+            <div class="course-list" id="courseList">
+                <div class="empty-state">Loading courses...</div>
+            </div>
+
+            <div class="card-footer">
+                <button id="submitBtn">Register selected courses</button>
+                <div class="status-msg" id="statusMsg"></div>
+            </div>
+        </div>
+    </div>
+
+    <script type="module">
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/12.14.0/firebase-app.js";
+        import {
+            getFirestore,
+            collection,
+            getDocs,
+            query,
+            where,
+            addDoc
+        } from "https://www.gstatic.com/firebasejs/12.14.0/firebase-firestore.js";
+        import { getAuth, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/12.14.0/firebase-auth.js";
+
+        const firebaseConfig = {
+            apiKey: "AIzaSyDjcNfeAoSv6l22eELrmnX82rs0Uh3TJ9I",
+            authDomain: "school-management-f7a54.firebaseapp.com",
+            projectId: "school-management-f7a54",
+            storageBucket: "school-management-f7a54.firebasestorage.app",
+            messagingSenderId: "333306723954",
+            appId: "1:333306723954:web:36b88533e53aee10128ceb"
+        };
+
+        const app = initializeApp(firebaseConfig);
+        const db = getFirestore(app);
+        const auth = getAuth(app);
+
+        const courseList = document.getElementById("courseList");
+        const creditTotal = document.getElementById("creditTotal");
+        const submitBtn = document.getElementById("submitBtn");
+        const statusMsg = document.getElementById("statusMsg");
+        const programmeTag = document.getElementById("programmeTag");
+        const lockedBanner = document.getElementById("lockedBanner");
+
+        function showStatus(message, type) {
+            statusMsg.textContent = message;
+            statusMsg.className = "status-msg " + type;
+        }
+
+        function updateCreditTotal() {
+            const checked = document.querySelectorAll(".course-item input[type='checkbox']:checked");
+            let total = 0;
+            checked.forEach(cb => total += Number(cb.dataset.credits));
+            creditTotal.textContent = total;
+        }
+
+        function renderCourses(courses, registeredCodes) {
+            if (courses.length === 0) {
+                courseList.innerHTML = `<div class="empty-state">No courses available for your programme yet.</div>`;
+                return;
+            }
+
+            courseList.innerHTML = "";
+
+            courses
+                .sort((a, b) => a.courseCode.localeCompare(b.courseCode))
+                .forEach(course => {
+                    const isRegistered = registeredCodes.includes(course.courseCode);
+                    const row = document.createElement("div");
+                    row.className = "course-item";
+                    row.innerHTML = `
+                        <input type="checkbox" data-credits="${course.credits}" data-code="${course.courseCode}"
+                            data-name="${course.courseName}" ${isRegistered ? "checked disabled" : ""}>
+                        <div class="course-info">
+                            <span class="course-code">${course.courseCode}</span>
+                            <span class="course-name">${course.courseName}</span>
+                            <span class="course-credits">${course.credits} credits</span>
+                            ${isRegistered ? `<span class="registered-badge">Registered</span>` : ""}
+                        </div>
+                    `;
+                    courseList.appendChild(row);
+                });
+
+            document.querySelectorAll(".course-item input[type='checkbox']:not([disabled])").forEach(cb => {
+                cb.addEventListener("change", updateCreditTotal);
+            });
+
+            updateCreditTotal();
+        }
+
+        onAuthStateChanged(auth, async (user) => {
+            if (!user) {
+                window.location.href = "../login.html";
+                return;
+            }
+
+            try {
+                // 1. Find the student's application/profile record
+                const appsSnap = await getDocs(collection(db, "applications"));
+                let studentData = null;
+
+                appsSnap.forEach(d => {
+                    const data = d.data();
+                    if (data.uid === user.uid) studentData = data;
+                });
+
+                if (!studentData) {
+                    courseList.innerHTML = `<div class="empty-state">Could not find your student profile.</div>`;
+                    return;
+                }
+
+                const programme = studentData.course;
+                const matricNumber = studentData.matricNumber;
+                programmeTag.textContent = programme;
+
+                // 2. Check if already registered (locked)
+                const regQuery = query(collection(db, "registrations"), where("matricNumber", "==", matricNumber));
+                const regSnap = await getDocs(regQuery);
+
+                let registeredCodes = [];
+                let alreadyRegistered = false;
+
+                regSnap.forEach(d => {
+                    alreadyRegistered = true;
+                    const data = d.data();
+                    registeredCodes = data.courses.map(c => c.courseCode);
+                });
+
+                // 3. Load courses for this programme
+                const coursesQuery = query(collection(db, "courses"), where("programme", "==", programme));
+                const coursesSnap = await getDocs(coursesQuery);
+                const courses = coursesSnap.docs.map(d => d.data());
+
+                renderCourses(courses, registeredCodes);
+
+                if (alreadyRegistered) {
+                    lockedBanner.style.display = "flex";
+                    submitBtn.disabled = true;
+                    submitBtn.textContent = "Already registered";
+                }
+
+                // 4. Handle submit
+                submitBtn.addEventListener("click", async () => {
+                    const checked = document.querySelectorAll(".course-item input[type='checkbox']:checked:not([disabled])");
+
+                    if (checked.length === 0) {
+                        showStatus("Please select at least one course", "error");
+                        return;
+                    }
+
+                    if (!confirm(`Register for ${checked.length} course(s)? This cannot be changed after submitting.`)) {
+                        return;
+                    }
+
+                    const selectedCourses = Array.from(checked).map(cb => ({
+                        courseCode: cb.dataset.code,
+                        courseName: cb.dataset.name,
+                        credits: Number(cb.dataset.credits)
+                    }));
+
+                    submitBtn.disabled = true;
+                    submitBtn.textContent = "Submitting...";
+
+                    try {
+                        await addDoc(collection(db, "registrations"), {
+                            uid: user.uid,
+                            matricNumber,
+                            programme,
+                            courses: selectedCourses,
+                            registeredAt: new Date().toISOString()
+                        });
+
+                        showStatus("Courses registered successfully", "success");
+                        submitBtn.textContent = "Already registered";
+                        lockedBanner.style.display = "flex";
+
+                        document.querySelectorAll(".course-item input[type='checkbox']").forEach(cb => {
+                            cb.disabled = true;
+                        });
+                    } catch (err) {
+                        console.error(err);
+                        showStatus("Failed to submit registration", "error");
+                        submitBtn.disabled = false;
+                        submitBtn.textContent = "Register selected courses";
+                    }
+                });
+
+            } catch (err) {
+                console.error(err);
+                courseList.innerHTML = `<div class="empty-state">Something went wrong loading courses.</div>`;
+            }
+        });
+    </script>
+</body>
+
+</html>

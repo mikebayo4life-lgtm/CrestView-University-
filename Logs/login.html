@@ -16,7 +16,7 @@
             font-family: 'Segoe UI', sans-serif;
         }
 
-       body {
+        body {
             min-height: 100vh;
             background:
                 linear-gradient(rgba(10, 35, 66, .85),
@@ -29,9 +29,11 @@
             align-items: center;
             padding: 20px;
         }
+
         .login-box {
             width: 420px;
             padding: 45px;
+            position: relative;
             border-radius: 18px;
             background: rgba(255, 255, 255, 0.08);
             backdrop-filter: blur(18px);
@@ -107,7 +109,7 @@
         .password-box i {
             position: absolute;
             right: 12px;
-            top: 50%;
+            top: 70%;
             transform: translateY(-50%);
             cursor: pointer;
             color: rgba(255, 255, 255, 0.6);
@@ -150,6 +152,41 @@
             font-weight: 600;
         }
 
+        .badge {
+            width: fit-content;
+            margin: 0 auto 20px;
+            background: rgba(201, 151, 0, .12);
+            color: #C99700;
+            padding: 10px 20px;
+            border-radius: 50px;
+            font-weight: 700;
+            border: 1px solid rgba(201, 151, 0, .3);
+        }
+
+        .back-home {
+            position: absolute;
+            top: 18px;
+            left: 18px;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: rgba(255, 255, 255, 0.08);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            color: white;
+            text-decoration: none;
+            font-size: 16px;
+            transition: 0.3s;
+        }
+
+        .back-home:hover {
+            background: rgba(245, 158, 11, 0.2);
+            color: #f59e0b;
+            transform: translateX(-3px);
+        }
+
         .links a:hover {
             text-decoration: underline;
         }
@@ -164,9 +201,13 @@
 </head>
 
 <body>
-
     <div class="login-box">
-
+        <a href="../index.html" class="back-home">
+            <i class="fa-solid fa-arrow-left"></i>
+        </a>
+        <div class="badge">
+            2026 Admission Portal
+        </div>
         <div class="logo">🎓 Crestview <span>University</span></div>
 
         <h2>Student Login</h2>

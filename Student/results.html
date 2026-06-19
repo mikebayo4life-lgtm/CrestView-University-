@@ -6,17 +6,76 @@
     <title>Student Results</title>
 
     <style>
+        @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500;600;700&family=Inter:wght@300;400;500;600&display=swap');
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
         body {
-            background: #f4f7fc;
-            font-family: Segoe UI;
-            padding: 30px;
+            background: #07111f;
+            font-family: 'Inter', 'Segoe UI', sans-serif;
+            padding: 40px 36px;
+            min-height: 100vh;
         }
 
         .container {
-            background: white;
-            padding: 25px;
-            border-radius: 15px;
-            box-shadow: 0 5px 15px rgba(0, 0, 0, .08);
+            background: rgba(255, 255, 255, 0.02);
+            padding: 36px;
+            border-radius: 24px;
+            border: 1px solid rgba(201, 151, 0, 0.18);
+            max-width: 860px;
+            margin: 0 auto;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .container::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 220px;
+            height: 1px;
+            background: linear-gradient(90deg, transparent, #C99700, transparent);
+        }
+
+        .container::after {
+            content: '';
+            position: absolute;
+            top: -80px;
+            right: -80px;
+            width: 260px;
+            height: 260px;
+            background: radial-gradient(circle, rgba(201, 151, 0, 0.06) 0%, transparent 70%);
+            border-radius: 50%;
+            pointer-events: none;
+        }
+
+        h2 {
+            margin-bottom: 28px;
+            color: #e8c84a;
+            font-family: 'Playfair Display', serif;
+            font-size: 26px;
+            font-weight: 600;
+            letter-spacing: 0.02em;
+            padding-bottom: 16px;
+            border-bottom: 1px solid rgba(201, 151, 0, 0.15);
+            position: relative;
+        }
+
+        h2::after {
+            content: '';
+            position: absolute;
+            bottom: -1px;
+            left: 0;
+            width: 60px;
+            height: 2px;
+            background: linear-gradient(90deg, #C99700, transparent);
+            border-radius: 2px;
         }
 
         table {
@@ -24,27 +83,174 @@
             border-collapse: collapse;
         }
 
-        th {
-            background: #0A2342;
-            color: white;
-            padding: 14px;
+        thead tr {
+            background: linear-gradient(90deg, #0c1b38, #0f2246);
+            position: relative;
         }
 
-        td {
-            padding: 14px;
-            border-bottom: 1px solid #eee;
+        thead tr::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            height: 1px;
+            background: linear-gradient(90deg, transparent, #C99700, transparent);
+        }
+
+        th {
+            color: #e8c84a;
+            padding: 16px 18px;
+            font-family: 'Inter', sans-serif;
+            font-size: 11px;
+            font-weight: 600;
+            letter-spacing: 0.14em;
+            text-transform: uppercase;
             text-align: center;
         }
 
-        h2 {
-            margin-bottom: 20px;
-            color: #0A2342;
+        th:first-child {
+            text-align: left;
+            border-radius: 10px 0 0 10px;
+        }
+
+        th:last-child {
+            border-radius: 0 10px 10px 0;
+        }
+
+        tbody tr {
+            border-bottom: 1px solid rgba(201, 151, 0, 0.07);
+            transition: background 0.2s ease;
+        }
+
+        tbody tr:last-child {
+            border-bottom: none;
+        }
+
+        tbody tr:hover {
+            background: rgba(201, 151, 0, 0.04);
+        }
+
+        td {
+            padding: 16px 18px;
+            text-align: center;
+            color: #d8dce8;
+            font-size: 14px;
+            font-weight: 400;
+        }
+
+        td:first-child {
+            text-align: left;
+            color: #e8eaf2;
+            font-weight: 500;
+            font-size: 14px;
+        }
+
+        td:nth-child(2) {
+            font-variant-numeric: tabular-nums;
+            color: rgba(200, 210, 235, 0.85);
+            font-size: 14px;
+        }
+
+        td:nth-child(3) {
+            font-weight: 600;
+            font-size: 13px;
+            letter-spacing: 0.06em;
+        }
+
+        td:nth-child(3) {
+            color: #e8c84a;
         }
 
         .cgpa {
-            margin-top: 20px;
-            font-size: 20px;
-            font-weight: bold;
+            margin-top: 28px;
+            padding: 20px 24px;
+            background: linear-gradient(135deg, rgba(12, 27, 56, 0.8), rgba(9, 18, 40, 0.9));
+            border-radius: 14px;
+            border: 1px solid rgba(201, 151, 0, 0.22);
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .cgpa::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 0;
+            bottom: 0;
+            width: 3px;
+            background: linear-gradient(180deg, #e8c84a, #8a5e00);
+            border-radius: 3px 0 0 3px;
+        }
+
+        .cgpa::after {
+            content: '';
+            position: absolute;
+            right: -30px;
+            top: -30px;
+            width: 120px;
+            height: 120px;
+            background: radial-gradient(circle, rgba(201, 151, 0, 0.07) 0%, transparent 70%);
+            border-radius: 50%;
+            pointer-events: none;
+        }
+
+        .cgpa span:first-child {
+            font-size: 11px;
+            font-weight: 600;
+            letter-spacing: 0.14em;
+            text-transform: uppercase;
+            color: rgba(201, 151, 0, 0.7);
+        }
+
+        #cgpaValue {
+            font-family: 'Playfair Display', serif;
+            font-size: 32px;
+            font-weight: 700;
+            color: #e8c84a;
+            letter-spacing: 0.02em;
+            text-shadow: 0 0 24px rgba(201, 151, 0, 0.25);
+        }
+
+        /* ::-webkit-scrollbar {
+            width: 6px;
+        }
+
+        ::-webkit-scrollbar-track {
+            background: #07111f;
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background: rgba(201, 151, 0, 0.3);
+            border-radius: 3px;
+        }
+
+        ::-webkit-scrollbar-thumb:hover {
+            background: rgba(201, 151, 0, 0.5);
+        } */
+
+        @media (max-width: 600px) {
+            body {
+                padding: 20px 16px;
+            }
+
+            .container {
+                padding: 22px 18px;
+                border-radius: 16px;
+            }
+
+            th,
+            td {
+                padding: 12px 10px;
+                font-size: 13px;
+            }
+
+            #cgpaValue {
+                font-size: 26px;
+            }
         }
     </style>
 
@@ -75,12 +281,114 @@
         </table>
 
         <div class="cgpa">
-         <span>CGPA:</span>
-         <span id="cgpaValue">0.00</span>
+            <span>CGPA:</span>
+            <span id="cgpaValue">0.00</span>
         </div>
 
     </div>
+    <script type="module">
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/12.14.0/firebase-app.js";
+        import {
+            getFirestore,
+            collection,
+            getDocs
+        } from "https://www.gstatic.com/firebasejs/12.14.0/firebase-firestore.js";
 
+        import {
+            getAuth,
+            onAuthStateChanged
+        } from "https://www.gstatic.com/firebasejs/12.14.0/firebase-auth.js";
+
+        const firebaseConfig = {
+            apiKey: "AIzaSyDjcNfeAoSv6l22eELrmnX82rs0Uh3TJ9I",
+            authDomain: "school-management-f7a54.firebaseapp.com",
+            projectId: "school-management-f7a54",
+            storageBucket: "school-management-f7a54.firebasestorage.app",
+            messagingSenderId: "333306723954",
+            appId: "1:333306723954:web:36b88533e53aee10128ceb"
+        };
+
+        const app = initializeApp(firebaseConfig);
+        const db = getFirestore(app);
+        const auth = getAuth(app);
+
+        // 🎯 Grade function
+        function getGrade(score) {
+            if (score >= 70) return "A";
+            if (score >= 60) return "B";
+            if (score >= 50) return "C";
+            return "D";
+        }
+
+        // 🎯 Grade point for CGPA
+        function getPoint(score) {
+            if (score >= 70) return 5;
+            if (score >= 60) return 4;
+            if (score >= 50) return 3;
+            if (score >= 45) return 2;
+            return 1;
+        }
+
+        function gradeClass(grade) {
+            return grade;
+        }
+
+        onAuthStateChanged(auth, async (user) => {
+
+            if (!user) {
+                window.location.href = "../login.html";
+                return;
+            }
+
+            // 1. Get student profile first
+            const apps = await getDocs(collection(db, "applications"));
+
+            let studentMatric = null;
+
+            apps.forEach((doc) => {
+                const d = doc.data();
+                if (d.uid === user.uid) {
+                    studentMatric = d.matricNumber;
+                }
+            });
+
+            if (!studentMatric) return;
+
+            // 2. Load results
+            const snapshot = await getDocs(collection(db, "results"));
+
+            const table = document.getElementById("resultTable");
+
+            let totalPoints = 0;
+            let totalCourses = 0;
+
+            snapshot.forEach((doc) => {
+                const data = doc.data();
+
+                // ✅ FILTER BY MATRIC NUMBER
+                if (data.matricNo === studentMatric) {
+
+                    const score = Number(data.score);
+
+                    const grade = getGrade(score);
+
+                    table.innerHTML += `
+                <tr>
+                    <td>${data.course}</td>
+                    <td>${score}</td>
+                    <td>${grade}</td>
+                </tr>
+            `;
+
+                    totalPoints += getPoint(score);
+                    totalCourses++;
+                }
+            });
+
+            let cgpa = totalCourses === 0 ? 0 : (totalPoints / totalCourses);
+            document.getElementById("cgpaValue").innerText = cgpa.toFixed(2);
+        });
+    </script>
 </body>
 
 </html>

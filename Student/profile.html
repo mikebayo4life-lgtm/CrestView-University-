@@ -6,79 +6,425 @@
     <title>Student Profile</title>
 
     <style>
+        @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500;600;700&family=Inter:wght@300;400;500;600&display=swap');
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Inter', 'Segoe UI', sans-serif;
+        }
+
         body {
-            background: #f4f7fc;
-            font-family: Segoe UI;
+            background: #060f1e;
+            display: flex;
+            min-height: 100vh;
         }
 
-        .profile {
-            max-width: 700px;
-            margin: 50px auto;
-            background: white;
-            padding: 30px;
-            border-radius: 15px;
-            box-shadow: 0 5px 15px rgba(0, 0, 0, .08);
+        /* ── Sidebar ── */
+        .sidebar {
+            width: 260px;
+            height: 100vh;
+            background: linear-gradient(180deg, #080f1f 0%, #0d1a35 60%, #0a1528 100%);
+            color: white;
+            padding: 32px 20px;
+            position: fixed;
+            border-right: 1px solid rgba(201, 151, 0, 0.15);
+            display: flex;
+            flex-direction: column;
+            gap: 4px;
         }
 
-        .profile h2 {
-            color: #0A2342;
-            margin-bottom: 20px;
+        .sidebar::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 2px;
+            background: linear-gradient(90deg, transparent, #C99700, transparent);
         }
 
-        .info {
-            margin-bottom: 15px;
+        .sidebar h2 {
+            text-align: center;
+            margin-bottom: 36px;
+            font-family: 'Playfair Display', serif;
+            font-size: 20px;
+            font-weight: 600;
+            letter-spacing: 0.04em;
+            color: #e8c84a;
+            text-shadow: 0 0 30px rgba(201, 151, 0, 0.3);
         }
 
-        .info span {
-            font-weight: bold;
+        .sidebar a {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            color: rgba(255, 255, 255, 0.65);
+            text-decoration: none;
+            padding: 12px 16px;
+            margin-bottom: 4px;
+            border-radius: 10px;
+            font-size: 14px;
+            font-weight: 400;
+            letter-spacing: 0.02em;
+            transition: all 0.25s ease;
+            border: 1px solid transparent;
+        }
+
+        .sidebar a:hover {
+            background: rgba(201, 151, 0, 0.1);
+            border-color: rgba(201, 151, 0, 0.3);
+            color: #e8c84a;
+            transform: translateX(4px);
+        }
+
+        /* ── Main ── */
+        .main {
+            margin-left: 260px;
+            width: calc(100% - 260px);
+            padding: 36px 40px;
+            background: #07111f;
+            min-height: 100vh;
+        }
+
+        /* ── Topbar ── */
+        .topbar {
+            background: rgba(255, 255, 255, 0.03);
+            padding: 22px 28px;
+            border-radius: 16px;
+            border: 1px solid rgba(201, 151, 0, 0.12);
+            margin-bottom: 30px;
+            backdrop-filter: blur(8px);
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .topbar h1 {
+            color: #e8c84a;
+            font-family: 'Playfair Display', serif;
+            font-size: 24px;
+            font-weight: 600;
+            letter-spacing: 0.02em;
+        }
+
+        .topbar::before {
+            content: '';
+            position: absolute;
+            left: 28px;
+            bottom: 0;
+            width: 60px;
+            height: 2px;
+            background: linear-gradient(90deg, #C99700, transparent);
+            border-radius: 2px;
+        }
+
+        /* ── Profile Card ── */
+        .profile-card {
+            background: rgba(255, 255, 255, 0.02);
+            border-radius: 24px;
+            overflow: hidden;
+            border: 1px solid rgba(201, 151, 0, 0.18);
+        }
+
+        /* ── Profile Header ── */
+        .profile-header {
+            background:
+                radial-gradient(ellipse 70% 80% at 50% -10%, rgba(201, 151, 0, 0.12) 0%, transparent 70%),
+                linear-gradient(160deg, #0c1b38 0%, #091228 50%, #070e1e 100%);
+            color: white;
+            text-align: center;
+            padding: 52px 24px 44px;
+            position: relative;
+            border-bottom: 1px solid rgba(201, 151, 0, 0.15);
+        }
+
+        .profile-header::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 200px;
+            height: 1px;
+            background: linear-gradient(90deg, transparent, #C99700, transparent);
+        }
+
+        /* ── Avatar ── */
+        .profile-pic {
+            width: 120px;
+            height: 120px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, #0d2051, #162d5e);
+            color: #e8c84a;
+            font-size: 44px;
+            font-weight: 600;
+            font-family: 'Playfair Display', serif;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 20px;
+            border: 2px solid rgba(201, 151, 0, 0.5);
+            outline: 4px solid rgba(201, 151, 0, 0.1);
+            outline-offset: 4px;
+            position: relative;
+        }
+
+        .profile-pic::after {
+            content: '';
+            position: absolute;
+            inset: -6px;
+            border-radius: 50%;
+            background: conic-gradient(from 0deg,
+                    rgba(201, 151, 0, 0.6),
+                    rgba(201, 151, 0, 0.05),
+                    rgba(201, 151, 0, 0.6),
+                    rgba(201, 151, 0, 0.05),
+                    rgba(201, 151, 0, 0.6));
+            -webkit-mask: radial-gradient(circle, transparent 56px, black 57px);
+            mask: radial-gradient(circle, transparent 56px, black 57px);
+        }
+
+        .profile-header h2 {
+            font-family: 'Playfair Display', serif;
+            font-size: 26px;
+            font-weight: 600;
+            color: #ffffff;
+            letter-spacing: 0.02em;
+            margin-bottom: 8px;
+        }
+
+        .profile-header p {
+            color: #e8c84a;
+            font-size: 13px;
+            font-weight: 500;
+            letter-spacing: 0.12em;
+            text-transform: uppercase;
+            opacity: 0.85;
+        }
+
+        /* ── Profile Body ── */
+        .profile-body {
+            padding: 36px;
+            background: rgba(255, 255, 255, 0.01);
+        }
+
+        .info-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 18px;
+        }
+
+        /* ── Info Boxes ── */
+        .info-box {
+            background: rgba(255, 255, 255, 0.03);
+            padding: 20px 22px;
+            border-radius: 14px;
+            border: 1px solid rgba(201, 151, 0, 0.1);
+            position: relative;
+            overflow: hidden;
+            transition: all 0.25s ease;
+        }
+
+        .info-box::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 3px;
+            height: 100%;
+            background: linear-gradient(180deg, #e8c84a, #8a5e00);
+            border-radius: 3px 0 0 3px;
+        }
+
+        .info-box::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            right: 0;
+            width: 60px;
+            height: 60px;
+            background: radial-gradient(circle, rgba(201, 151, 0, 0.06) 0%, transparent 70%);
+            border-radius: 50%;
+        }
+
+        .info-box:hover {
+            background: rgba(201, 151, 0, 0.05);
+            border-color: rgba(201, 151, 0, 0.25);
+            transform: translateY(-2px);
+        }
+
+        .info-box h4 {
+            color: rgba(201, 151, 0, 0.7);
+            margin-bottom: 8px;
+            font-size: 11px;
+            font-weight: 500;
+            letter-spacing: 0.12em;
+            text-transform: uppercase;
+        }
+
+        .info-box p {
+            color: #e8eaf2;
+            font-size: 16px;
+            font-weight: 500;
+            letter-spacing: 0.01em;
+        }
+
+        /* ── Scrollbar ── */
+        ::-webkit-scrollbar {
+            width: 6px;
+        }
+
+        ::-webkit-scrollbar-track {
+            background: #07111f;
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background: rgba(201, 151, 0, 0.3);
+            border-radius: 3px;
+        }
+
+        ::-webkit-scrollbar-thumb:hover {
+            background: rgba(201, 151, 0, 0.5);
+        }
+
+        /* ── Responsive ── */
+        @media (max-width: 768px) {
+            body {
+                flex-direction: column;
+            }
+
+            .sidebar {
+                width: 100%;
+                height: auto;
+                position: relative;
+                padding: 20px;
+            }
+
+            .sidebar a {
+                display: inline-flex;
+                margin-right: 8px;
+                margin-bottom: 0;
+            }
+
+            .main {
+                margin-left: 0;
+                width: 100%;
+                padding: 20px;
+            }
+
+            .profile-body {
+                padding: 20px;
+            }
         }
     </style>
-
 </head>
 
 <body>
 
-    <div class="profile">
-
-        <h2>Student Profile</h2>
-
-        <div class="info">
-            <span>Name:</span>
-            <span id="studentName">
-                Loading...
-            </span>
-        </div>
-
-        <div class="info">
-        <span>Email:</span>
-            <span id="studentEmail">
-                Loading...
-            </span>
-        </div>
-
-        <div class="info">
-        <SPAN>Phone:</SPAN>
-            <span id="studentPhone">
-                Loading...
-            </span>
-        </div>
-
-        <div class="info">
-            <span>Matric Number:</span>
-            <span id="matricNumber">
-                Loading...
-            </span>
-        </div>
-
-        <div class="info">
-            <span>Programme:</span>
-            <span id="studentProgramme">
-                Loading...
-            </span>
-        </div>
-
+    <div class="sidebar">
+        <h2>Student Portal</h2>
+        <a href="dashboard.html">Dashboard</a>
+        <a href="profile.html">Profile</a>
+        <a href="./register.html">Course Registration</a>
+        <a href="results.html">Results</a>
+        <!-- <a href="../login.html">Logout</a> -->
     </div>
+    <div class="main">
+        <div class="topbar">
+            <h1>Student Profile</h1>
+        </div>
+        <div class="profile-card">
+            <div class="profile-header">
+                <div class="profile-pic" id="avatar"> S </div>
+                <h2 id="studentName"> Loading... </h2>
+                <p id="studentProgramme"> Loading... </p>
+            </div>
+            <div class="profile-body">
+                <div class="info-grid">
+                    <div class="info-box">
+                        <h4>Email Address</h4>
+                        <p id="studentEmail">Loading...</p>
+                    </div>
+                    <!-- <div class="info-box">
+                        <h4>Phone Number</h4>
+                        <p id="studentPhone">Loading...</p>
+                    </div> -->
+                    <div class="info-box">
+                        <h4>Matric Number</h4>
+                        <p id="matricNumber">Loading...</p>
+                    </div>
+                    <div class="info-box">
+                        <h4>Gender</h4>
+                        <p id="studentGender">Loading...</p>
+                    </div>
+                    <div class="info-box">
+                        <h4>State of Origin</h4>
+                        <p id="studentState">Loading...</p>
+                    </div>
+                    <div class="info-box">
+                        <h4>Nationality</h4>
+                        <p id="studentNationality">Loading...</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script type="module">
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/12.14.0/firebase-app.js";
+        import { getFirestore, collection, getDocs } from "https://www.gstatic.com/firebasejs/12.14.0/firebase-firestore.js";
+        import { getAuth, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/12.14.0/firebase-auth.js";
 
+        const firebaseConfig = {
+            apiKey: "AIzaSyDjcNfeAoSv6l22eELrmnX82rs0Uh3TJ9I",
+            authDomain: "school-management-f7a54.firebaseapp.com",
+            projectId: "school-management-f7a54",
+            storageBucket: "school-management-f7a54.firebasestorage.app",
+            messagingSenderId: "333306723954",
+            appId: "1:333306723954:web:36b88533e53aee10128ceb"
+        };
+
+        const app = initializeApp(firebaseConfig);
+        const db = getFirestore(app);
+        const auth = getAuth(app);
+
+        function renderProfile(data) {
+            document.getElementById("studentName").innerText =
+                `${data.firstName} ${data.lastName}`;
+
+            document.getElementById("studentEmail").innerText = data.email;
+            // document.getElementById("studentPhone").innerText = data.number;
+            document.getElementById("matricNumber").innerText = data.matricNumber;
+            document.getElementById("studentProgramme").innerText = data.course;
+            document.getElementById("studentGender").innerText = data.gender;
+            document.getElementById("studentState").innerText = data.state;
+            document.getElementById("studentNationality").innerText = data.nationality;
+
+            document.getElementById("avatar").innerText =
+                data.firstName.charAt(0).toUpperCase();
+        }
+
+        onAuthStateChanged(auth, async (user) => {
+            console.log("Auth user:", user);
+
+            if (!user) {
+                window.location.href = "../login.html";
+                return;
+            }
+
+            const snapshot = await getDocs(collection(db, "applications"));
+
+            snapshot.forEach((doc) => {
+                const data = doc.data();
+
+                if (data.uid === user.uid) {
+                    console.log("Matched student:", data);
+                    renderProfile(data);
+                }
+            });
+        });
+    </script>
 </body>
 
 </html>

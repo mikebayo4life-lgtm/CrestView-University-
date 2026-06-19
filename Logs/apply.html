@@ -186,6 +186,30 @@
             text-decoration: underline;
         }
 
+        .back-home {
+            position: absolute;
+            top: 18px;
+            left: 18px;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: rgba(255, 255, 255, 0.08);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            color: white;
+            text-decoration: none;
+            font-size: 16px;
+            transition: 0.3s;
+        }
+
+        .back-home:hover {
+            background: rgba(245, 158, 11, 0.2);
+            color: #f59e0b;
+            transform: translateX(-3px);
+        }
+
         footer {
             text-align: center;
             padding: 25px;
@@ -214,6 +238,9 @@
 <body>
 
     <header>
+        <a href="../index.html" class="back-home">
+            <i class="fa-solid fa-arrow-left"></i>
+        </a>
         <div class="logo">
             Crestview <span>University</span>
         </div>
@@ -224,7 +251,7 @@
         <div class="badge">
             2026 Admission Portal
         </div>
-        
+
         <h2>Undergraduate Application Form</h2>
         <p>Fill in your details carefully to apply for admission</p>
 
@@ -292,11 +319,11 @@
                     <label>Preferred Course</label>
                     <select id="course" required>
                         <option value="">Select course</option>
-                        <option value="Computer Science">Computer Science</option>
-                        <option value="Cyber Security">Cyber Security</option>
-                        <option value="Software Engineering">Software Engineering</option>
-                        <option value="Information Technology">Information Technology</option>
-                        <option value="Data Science">Data Science</option>
+                        <option value="Computer Science">BSc.Computer Science</option>
+                        <option value="Cyber Security">BSc.Cyber Security</option>
+                        <option value="Software Engineering">BSc.Software Engineering</option>
+                        <option value="Information Technology">BSc.Information Technology</option>
+                        <option value="Data Science">BSc.Data Science</option>
                     </select>
                 </div>
             </div>

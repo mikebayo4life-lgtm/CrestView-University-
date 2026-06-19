@@ -1,0 +1,400 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Manage Courses</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500;600;700&family=Inter:wght@300;400;500;600&display=swap"
+        rel="stylesheet">
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Inter', 'Segoe UI', sans-serif;
+        }
+
+        body {
+            background: #07111f;
+            display: flex;
+            min-height: 100vh;
+        }
+
+        /* ── Sidebar ── */
+        .sidebar {
+            width: 260px;
+            height: 100vh;
+            background: linear-gradient(180deg, #080f1f 0%, #0d1a35 60%, #0a1528 100%);
+            color: white;
+            padding: 32px 20px;
+            position: fixed;
+            border-right: 1px solid rgba(201, 151, 0, 0.15);
+        }
+
+        .sidebar::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 2px;
+            background: linear-gradient(90deg, transparent, #C99700, transparent);
+        }
+
+        .sidebar h2 {
+            text-align: center;
+            margin-bottom: 36px;
+            font-family: 'Playfair Display', serif;
+            font-size: 20px;
+            font-weight: 600;
+            letter-spacing: 0.04em;
+            color: #e8c84a;
+        }
+
+        .sidebar a {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            color: rgba(255, 255, 255, 0.65);
+            text-decoration: none;
+            padding: 12px 16px;
+            margin-bottom: 4px;
+            border-radius: 10px;
+            font-size: 14px;
+            transition: all 0.25s ease;
+            border: 1px solid transparent;
+        }
+
+        .sidebar a:hover,
+        .sidebar a.active {
+            background: rgba(201, 151, 0, 0.1);
+            border-color: rgba(201, 151, 0, 0.3);
+            color: #e8c84a;
+        }
+
+        /* ── Main ── */
+        .main {
+            margin-left: 260px;
+            width: calc(100% - 260px);
+            padding: 36px 40px;
+        }
+
+        .topbar {
+            background: rgba(255, 255, 255, 0.03);
+            padding: 22px 28px;
+            border-radius: 16px;
+            border: 1px solid rgba(201, 151, 0, 0.12);
+            margin-bottom: 30px;
+        }
+
+        .topbar h1 {
+            color: #e8c84a;
+            font-family: 'Playfair Display', serif;
+            font-size: 24px;
+            font-weight: 600;
+        }
+
+        /* ── Layout ── */
+        .grid {
+            display: grid;
+            grid-template-columns: 360px 1fr;
+            gap: 24px;
+            align-items: start;
+        }
+
+        @media (max-width: 900px) {
+            .grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        .card {
+            background: rgba(255, 255, 255, 0.02);
+            border-radius: 20px;
+            border: 1px solid rgba(201, 151, 0, 0.18);
+            padding: 28px;
+        }
+
+        .card h3 {
+            font-family: 'Playfair Display', serif;
+            color: #fff;
+            font-size: 18px;
+            font-weight: 600;
+            margin-bottom: 20px;
+            padding-bottom: 14px;
+            border-bottom: 1px solid rgba(201, 151, 0, 0.15);
+        }
+
+        /* ── Form ── */
+        label {
+            display: block;
+            font-size: 11px;
+            font-weight: 600;
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+            color: rgba(201, 151, 0, 0.7);
+            margin-bottom: 6px;
+        }
+
+        .field {
+            margin-bottom: 18px;
+        }
+
+        input,
+        select {
+            width: 100%;
+            padding: 12px 14px;
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid rgba(201, 151, 0, 0.18);
+            border-radius: 10px;
+            color: #e8eaf2;
+            font-size: 14px;
+            outline: none;
+            transition: border-color 0.2s ease;
+        }
+
+        input::placeholder {
+            color: rgba(216, 220, 232, 0.35);
+        }
+
+        input:focus,
+        select:focus {
+            border-color: rgba(201, 151, 0, 0.6);
+        }
+
+        select option {
+            background: #0d1a35;
+            color: #e8eaf2;
+        }
+
+        button {
+            width: 100%;
+            padding: 13px;
+            margin-top: 6px;
+            background: linear-gradient(135deg, #e8c84a, #b9860a);
+            border: none;
+            border-radius: 10px;
+            color: #1a1300;
+            font-size: 14px;
+            font-weight: 600;
+            letter-spacing: 0.03em;
+            cursor: pointer;
+            transition: transform 0.15s ease, box-shadow 0.15s ease;
+        }
+
+        button:hover {
+            transform: translateY(-1px);
+            box-shadow: 0 6px 18px rgba(201, 151, 0, 0.25);
+        }
+
+        button:active {
+            transform: translateY(0);
+        }
+
+        .status-msg {
+            margin-top: 14px;
+            font-size: 13px;
+            text-align: center;
+            min-height: 18px;
+        }
+
+        .status-msg.success {
+            color: #9fe1cb;
+        }
+
+        .status-msg.error {
+            color: #f0997b;
+        }
+
+        /* ── Table ── */
+        .table-card {
+            padding: 0;
+            overflow: hidden;
+        }
+
+        .table-card h3 {
+            margin: 28px 28px 0;
+        }
+
+        .filter-row {
+            display: flex;
+            gap: 12px;
+            padding: 18px 28px;
+        }
+
+        .filter-row select {
+            width: auto;
+            flex: 1;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        thead tr {
+            background: linear-gradient(90deg, #0c1b38, #0f2246);
+        }
+
+        th {
+            color: #e8c84a;
+            padding: 14px 16px;
+            font-size: 11px;
+            font-weight: 600;
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+            text-align: left;
+        }
+
+        th.center,
+        td.center {
+            text-align: center;
+        }
+
+        tbody tr {
+            border-bottom: 1px solid rgba(201, 151, 0, 0.07);
+        }
+
+        tbody tr:last-child {
+            border-bottom: none;
+        }
+
+        tbody tr:hover {
+            background: rgba(201, 151, 0, 0.04);
+        }
+
+        td {
+            padding: 14px 16px;
+            color: #d8dce8;
+            font-size: 14px;
+        }
+
+        td.code {
+            color: #e8c84a;
+            font-weight: 600;
+        }
+
+        .badge {
+            display: inline-block;
+            padding: 4px 10px;
+            border-radius: 8px;
+            font-size: 11px;
+            font-weight: 600;
+            letter-spacing: 0.04em;
+            background: rgba(201, 151, 0, 0.12);
+            color: #e8c84a;
+        }
+
+        .delete-btn {
+            width: auto;
+            padding: 6px 14px;
+            background: rgba(226, 75, 74, 0.12);
+            color: #f0997b;
+            font-size: 12px;
+            font-weight: 500;
+        }
+
+        .delete-btn:hover {
+            box-shadow: 0 4px 12px rgba(226, 75, 74, 0.2);
+        }
+
+        .empty-state {
+            padding: 40px 28px;
+            text-align: center;
+            color: rgba(216, 220, 232, 0.4);
+            font-size: 14px;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="sidebar">
+        <h2>Admin Portal</h2>
+        <a href="dashboard.html">Dashboard</a>
+        <a href="applications.html">Applications</a>
+        <a href="students.html">Students</a>
+        <a href="courses.html" class="active">Courses</a>
+        <a href="results.html">Results</a>
+    </div>
+
+    <div class="main">
+        <div class="topbar">
+            <h1>Manage Courses</h1>
+        </div>
+
+        <div class="grid">
+
+            <!-- Add Course Form -->
+            <div class="card">
+                <h3>Add new course</h3>
+                <form id="courseForm">
+                    <div class="field">
+                        <label>Programme</label>
+                        <select id="programme" required>
+                            <option value="" disabled selected>Select programme</option>
+                            <option value="Computer Science">Computer Science</option>
+                            <option value="Cybersecurity">Cybersecurity</option>
+                            <option value="Information Technology">Information Technology</option>
+                            <option value="Data Science">Data Science</option>
+                        </select>
+                    </div>
+
+                    <div class="field">
+                        <label>Course code</label>
+                        <input type="text" id="courseCode" placeholder="e.g. 101" required>
+                    </div>
+
+                    <div class="field">
+                        <label>Course name</label>
+                        <input type="text" id="courseName" placeholder="e.g. Introduction to Programming" required>
+                    </div>
+
+                    <div class="field">
+                        <label>Credits</label>
+                        <input type="number" id="credits" placeholder="e.g. 3" min="1" max="10" required>
+                    </div>
+
+                    <button type="submit" id="submitBtn">Add course</button>
+                    <div class="status-msg" id="statusMsg"></div>
+                </form>
+            </div>
+
+            <!-- Courses Table -->
+            <div class="card table-card">
+                <h3>All courses</h3>
+                <div class="filter-row">
+                    <select id="filterProgramme">
+                        <option value="all">All programmes</option>
+                        <option value="Computer Science">Computer Science</option>
+                        <option value="Cybersecurity">Cybersecurity</option>
+                        <option value="Information Technology">Information Technology</option>
+                        <option value="Data Science">Data Science</option>
+                    </select>
+                </div>
+
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Code</th>
+                            <th>Course name</th>
+                            <th>Programme</th>
+                            <th class="center">Credits</th>
+                            <th class="center">Action</th>
+                        </tr>
+                    </thead>
+                    <tbody id="coursesTable"></tbody>
+                </table>
+                <div class="empty-state" id="emptyState" style="display:none;">No courses added yet.</div>
+            </div>
+
+        </div>
+    </div>
+
+    <script type="module" src="./course.js"></script>
+</body>
+
+</html>
