@@ -197,6 +197,96 @@
                 padding: 30px;
             }
         }
+
+        /* SweetAlert2 Luxurious Blue & Gold Styling */
+        .swal2-popup {
+            background: linear-gradient(135deg, rgba(15, 45, 85, 0.95), rgba(25, 60, 100, 0.95)) !important;
+            backdrop-filter: blur(20px) !important;
+            border: 2px solid rgba(245, 158, 11, 0.4) !important;
+            border-radius: 20px !important;
+            box-shadow: 0 25px 70px rgba(0, 0, 0, 0.5), 0 0 40px rgba(245, 158, 11, 0.2) !important;
+        }
+
+        .swal2-title {
+            color: #f59e0b !important;
+            font-size: 1.8rem !important;
+            font-weight: 700 !important;
+            text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3) !important;
+        }
+
+        .swal2-html-container {
+            color: rgba(255, 255, 255, 0.9) !important;
+            font-size: 1.05rem !important;
+            line-height: 1.6 !important;
+        }
+
+        .swal2-confirm,
+        .swal2-deny {
+            padding: 12px 32px !important;
+            border-radius: 10px !important;
+            font-weight: 600 !important;
+            border: none !important;
+            transition: all 0.3s ease !important;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.3) !important;
+        }
+
+        .swal2-confirm {
+            background: linear-gradient(135deg, #f59e0b, #d97706) !important;
+            color: white !important;
+        }
+
+        .swal2-confirm:hover {
+            transform: translateY(-2px) !important;
+            box-shadow: 0 15px 35px rgba(245, 158, 11, 0.4) !important;
+        }
+
+        .swal2-cancel {
+            background: rgba(255, 255, 255, 0.1) !important;
+            border: 1px solid rgba(245, 158, 11, 0.4) !important;
+            color: #f59e0b !important;
+        }
+
+        .swal2-cancel:hover {
+            background: rgba(245, 158, 11, 0.1) !important;
+        }
+
+        .swal2-icon {
+            border: 3px solid rgba(245, 158, 11, 0.6) !important;
+        }
+
+        .swal2-icon.swal2-error .swal2-x-mark {
+            color: #f59e0b !important;
+        }
+
+        .swal2-icon.swal2-error {
+            background: rgba(245, 158, 11, 0.1) !important;
+            border-color: #f59e0b !important;
+        }
+
+        .swal2-icon.swal2-success {
+            background: rgba(34, 197, 94, 0.1) !important;
+            border-color: #22c55e !important;
+        }
+
+        .swal2-icon.swal2-success .swal2-success-ring {
+            border-color: rgba(34, 197, 94, 0.3) !important;
+        }
+
+        .swal2-icon.swal2-success [class*=swal2-success-line] {
+            background: #22c55e !important;
+        }
+
+        @keyframes slideIn {
+            from {
+                opacity: 0;
+                transform: scale(0.8) translateY(-30px);
+            }
+
+            to {
+                opacity: 1;
+                transform: scale(1) translateY(0);
+            }
+        }
     </style>
 </head>
 
@@ -238,8 +328,18 @@
 
     <script type="module">
         import { initializeApp } from "https://www.gstatic.com/firebasejs/12.14.0/firebase-app.js";
-        import { getFirestore } from "https://www.gstatic.com/firebasejs/12.14.0/firebase-firestore.js";
-        import { getAuth, signInWithEmailAndPassword } from "https://www.gstatic.com/firebasejs/12.14.0/firebase-auth.js";
+
+        import {
+            getFirestore,
+            collection,
+            getDocs
+        } from "https://www.gstatic.com/firebasejs/12.14.0/firebase-firestore.js";
+
+        import {
+            getAuth,
+            signInWithEmailAndPassword,
+            signOut
+        } from "https://www.gstatic.com/firebasejs/12.14.0/firebase-auth.js";
 
         const firebaseConfig = {
             apiKey: "AIzaSyDjcNfeAoSv6l22eELrmnX82rs0Uh3TJ9I",
@@ -252,36 +352,138 @@
 
         const app = initializeApp(firebaseConfig);
         const auth = getAuth(app);
+        const db = getFirestore(app);
 
         const password = document.getElementById("password");
         const togglePassword = document.getElementById("togglePassword");
 
         togglePassword.addEventListener("click", () => {
+
             if (password.type === "password") {
+
                 password.type = "text";
-                togglePassword.classList.replace("fa-eye", "fa-eye-slash");
+                togglePassword.classList.replace(
+                    "fa-eye",
+                    "fa-eye-slash"
+                );
+
             } else {
+
                 password.type = "password";
-                togglePassword.classList.replace("fa-eye-slash", "fa-eye");
+                togglePassword.classList.replace(
+                    "fa-eye-slash",
+                    "fa-eye"
+                );
+
             }
+
         });
 
-        document.getElementById("loginForm").addEventListener("submit", async (e) => {
-            e.preventDefault();
+        document
+            .getElementById("loginForm")
+            .addEventListener("submit", async (e) => {
 
-            const email = document.getElementById("email").value;
-            const pass = document.getElementById("password").value;
+                e.preventDefault();
 
-            try {
-                await signInWithEmailAndPassword(auth, email, pass);
+                const email =
+                    document.getElementById("email").value;
 
-                window.location.href = "../Student/dashboard.html";
+                const pass =
+                    document.getElementById("password").value;
 
-            } catch (error) {
-                Swal.fire("Login failed", error.message, "error");
-                console.error(error);
-            }
-        });
+                try {
+
+                    const userCredential =
+                        await signInWithEmailAndPassword(
+                            auth,
+                            email,
+                            pass
+                        );
+
+                    const user = userCredential.user;
+
+                    const snapshot = await getDocs(
+                        collection(db, "applications")
+                    );
+
+                    let found = false;
+
+                    snapshot.forEach((doc) => {
+
+                        const data = doc.data();
+
+                        if (data.uid === user.uid) {
+
+                            found = true;
+
+                            if (data.status === "Rejected") {
+
+                                Swal.fire({
+                                    icon: "error",
+                                    title: "Access Denied",
+                                    text: "Your application was rejected."
+                                });
+
+                                signOut(auth);
+                                return;
+                            }
+
+                            if (data.status === "Pending") {
+
+                                Swal.fire({
+                                    icon: "info",
+                                    title: "Application Pending",
+                                    text: "Your application is still under review."
+                                });
+
+                                signOut(auth);
+                                return;
+                            }
+
+                            if (data.status === "Approved") {
+
+                                Swal.fire({
+                                    icon: "success",
+                                    title: "Login Successful",
+                                    text: "Welcome to your student portal."
+                                }).then(() => {
+
+                                    window.location.href =
+                                        "../Student/dashboard.html";
+
+                                });
+
+                            }
+
+                        }
+
+                    });
+
+                    if (!found) {
+
+                        Swal.fire({
+                            icon: "error",
+                            title: "Application Not Found",
+                            text: "No application record was found for this account."
+                        });
+
+                        await signOut(auth);
+
+                    }
+
+                } catch (error) {
+
+                    Swal.fire({
+                        icon: "error",
+                        title: "Login Failed",
+                        text: error.message
+                    });
+
+                    console.log(error);
+
+                }
+
+            });
     </script>
 
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>

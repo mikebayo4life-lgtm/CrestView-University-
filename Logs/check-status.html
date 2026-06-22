@@ -193,6 +193,94 @@
                 font-size: 1.6rem;
             }
         }
+
+        /* SweetAlert2 Luxurious Blue & Gold Styling */
+        .swal2-popup {
+            background: linear-gradient(135deg, rgba(15, 45, 85, 0.95), rgba(25, 60, 100, 0.95)) !important;
+            backdrop-filter: blur(20px) !important;
+            border: 2px solid rgba(245, 158, 11, 0.4) !important;
+            border-radius: 20px !important;
+            box-shadow: 0 25px 70px rgba(0, 0, 0, 0.5), 0 0 40px rgba(245, 158, 11, 0.2) !important;
+        }
+
+        .swal2-title {
+            color: #f59e0b !important;
+            font-size: 1.8rem !important;
+            font-weight: 700 !important;
+            text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3) !important;
+        }
+
+        .swal2-html-container {
+            color: rgba(255, 255, 255, 0.9) !important;
+            font-size: 1.05rem !important;
+            line-height: 1.6 !important;
+        }
+
+        .swal2-confirm, .swal2-deny {
+            padding: 12px 32px !important;
+            border-radius: 10px !important;
+            font-weight: 600 !important;
+            border: none !important;
+            transition: all 0.3s ease !important;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.3) !important;
+        }
+
+        .swal2-confirm {
+            background: linear-gradient(135deg, #f59e0b, #d97706) !important;
+            color: white !important;
+        }
+
+        .swal2-confirm:hover {
+            transform: translateY(-2px) !important;
+            box-shadow: 0 15px 35px rgba(245, 158, 11, 0.4) !important;
+        }
+
+        .swal2-cancel {
+            background: rgba(255, 255, 255, 0.1) !important;
+            border: 1px solid rgba(245, 158, 11, 0.4) !important;
+            color: #f59e0b !important;
+        }
+
+        .swal2-cancel:hover {
+            background: rgba(245, 158, 11, 0.1) !important;
+        }
+
+        .swal2-icon {
+            border: 3px solid rgba(245, 158, 11, 0.6) !important;
+        }
+
+        .swal2-icon.swal2-error .swal2-x-mark {
+            color: #f59e0b !important;
+        }
+
+        .swal2-icon.swal2-error {
+            background: rgba(245, 158, 11, 0.1) !important;
+            border-color: #f59e0b !important;
+        }
+
+        .swal2-icon.swal2-success {
+            background: rgba(34, 197, 94, 0.1) !important;
+            border-color: #22c55e !important;
+        }
+
+        .swal2-icon.swal2-success .swal2-success-ring {
+            border-color: rgba(34, 197, 94, 0.3) !important;
+        }
+
+        .swal2-icon.swal2-success [class*=swal2-success-line] {
+            background: #22c55e !important;
+        }
+
+        @keyframes slideIn {
+            from {
+                opacity: 0;
+                transform: scale(0.8) translateY(-30px);
+            }
+            to {
+                opacity: 1;
+                transform: scale(1) translateY(0);
+            }
+        }
     </style>
 </head>
 
@@ -299,7 +387,12 @@
                         Swal.fire({
                             icon: 'info',
                             title: 'Application Pending',
-                            text: 'Your application is still under review. Please check back later.',
+                            html: '<span style="font-size: 1.05rem;">Your application is still under review. Please check back later.</span>',
+                            confirmButtonText: 'OK',
+                            allowOutsideClick: false,
+                            didOpen: (modal) => {
+                                modal.style.animation = 'slideIn 0.5s ease-out';
+                            }
                         });
                         document.getElementById("status").innerHTML =
                             "Status: Pending ⏳";
@@ -310,7 +403,12 @@
                         Swal.fire({
                             icon: 'success',
                             title: 'Application Approved',
-                            text: 'Congratulations! Your application has been approved.',
+                            html: '<span style="font-size: 1.05rem;">Congratulations! Your application has been approved.</span>',
+                            confirmButtonText: 'Continue',
+                            allowOutsideClick: false,
+                            // didOpen: (modal) => {
+                            //     modal.style.animation = 'slideIn 0.5s ease-out';
+                            // }
                         });
                         document.getElementById("status").innerHTML =
                             "Status: Approved ";
@@ -324,7 +422,12 @@
                         Swal.fire({
                             icon: 'error',
                             title: 'Application Rejected',
-                            text: 'Unfortunately, your application was not successful.',
+                            html: '<span style="font-size: 1.05rem;">Unfortunately, your application was not successful.</span>',
+                            confirmButtonText: 'OK',
+                            allowOutsideClick: false,
+                            // didOpen: (modal) => {
+                            //     modal.style.animation = 'slideIn 0.5s ease-out';
+                            // }
                         });
                         document.getElementById("status").innerHTML =
                             "Status: Rejected ";
@@ -343,7 +446,12 @@
                     Swal.fire({
                         icon: 'error',
                         title: 'Email Not Found',
-                        text: 'No application found for the provided email address.',
+                        html: '<span style="font-size: 1.05rem;">No application found for the provided email address.</span>',
+                        confirmButtonText: 'Try Again',
+                        allowOutsideClick: false,
+                        // didOpen: (modal) => {
+                        //     modal.style.animation = 'slideIn 0.5s ease-out';
+                        // }
                     });
                     document.getElementById("result").style.display = "none";
 
