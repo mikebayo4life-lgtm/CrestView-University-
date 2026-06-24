@@ -70,8 +70,11 @@ pendingCount.innerHTML = pendingApplications;
 
 document.getElementById("logout").addEventListener("click", async (e) => {
     e.preventDefault();
-    await signOut(auth);
+    try {
+        await signOut(auth);
+    } catch (error) {
+        console.error(error);
+    }
 
-    window.location.replace("/Logs/login.html");
-
+    window.location.replace(new URL("../Logs/login.html", window.location.href).href);
 });
