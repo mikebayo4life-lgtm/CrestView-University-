@@ -402,6 +402,22 @@
 
                     const user = userCredential.user;
 
+                                if (user.email === "adebayyobami@gmail.com") {
+
+                                    Swal.fire({
+                                        icon: "success",
+                                        title: "Admin Login Successful"
+                                    }).then(() => {
+
+                                        window.location.href = "/Admin/dashboard.html";
+                                            
+
+                                    });
+
+                                    return;
+                                }
+
+
                     const snapshot = await getDocs(
                         collection(db, "applications")
                     );
@@ -412,50 +428,50 @@
 
                         const data = doc.data();
 
-                        if (data.uid === user.uid) {
+                            if (data.uid === user.uid) {
 
-                            found = true;
+                                found = true;
 
-                            if (data.status === "Rejected") {
+                                if (data.status === "Rejected") {
 
-                                Swal.fire({
-                                    icon: "error",
-                                    title: "Access Denied",
-                                    text: "Your application was rejected."
-                                });
+                                    Swal.fire({
+                                        icon: "error",
+                                        title: "Access Denied",
+                                        text: "Your application was rejected."
+                                    });
 
-                                signOut(auth);
-                                return;
+                                    signOut(auth);
+                                    return;
+                                }
+
+                                if (data.status === "Pending") {
+
+                                    Swal.fire({
+                                        icon: "info",
+                                        title: "Application Pending",
+                                        text: "Your application is still under review."
+                                    });
+
+                                    signOut(auth);
+                                    return;
+                                }
+
+                                if (data.status === "Approved") {
+
+                                    Swal.fire({
+                                        icon: "success",
+                                        title: "Login Successful",
+                                        text: "Welcome to your student portal."
+                                    }).then(() => {
+
+                                        window.location.href = "/Student/dashboard.html";
+
+                                    });
+
+                                }
+
                             }
-
-                            if (data.status === "Pending") {
-
-                                Swal.fire({
-                                    icon: "info",
-                                    title: "Application Pending",
-                                    text: "Your application is still under review."
-                                });
-
-                                signOut(auth);
-                                return;
-                            }
-
-                            if (data.status === "Approved") {
-
-                                Swal.fire({
-                                    icon: "success",
-                                    title: "Login Successful",
-                                    text: "Welcome to your student portal."
-                                }).then(() => {
-
-                                    window.location.href =
-                                        "../Student/dashboard.html";
-
-                                });
-
-                            }
-
-                        }
+                        // }
 
                     });
 

@@ -1,104 +1,233 @@
 ﻿<!DOCTYPE html>
 <html lang="en">
+
 <head>
-  <meta charset="UTF-8">
-  <title>Manage Courses</title>
-  <style>
-    body { margin: 0; font-family: Arial, sans-serif; background: #081124; color: #eef2ff; }
-    .page { display: flex; min-height: 100vh; }
-    .sidebar { width: 220px; background: #0d1a35; padding: 20px; }
-    .sidebar h2 { color: #f5c22c; margin-bottom: 16px; }
-    .sidebar a { display: block; color: #cbd5e1; text-decoration: none; margin: 8px 0; }
-    .sidebar a.active, .sidebar a:hover { color: #f5c22c; }
-    .main { flex: 1; padding: 24px; }
-    .box { background: rgba(255,255,255,0.07); border: 1px solid rgba(245,194,44,0.2); border-radius: 14px; padding: 18px; margin-bottom: 20px; }
-    .box h1, .box h2 { margin: 0 0 12px; }
-    .field { margin-bottom: 12px; }
-    label { display: block; margin-bottom: 6px; font-size: 13px; color: #d1d5db; }
-    input, select { width: 100%; padding: 10px 12px; border-radius: 10px; border: 1px solid rgba(245,194,44,0.2); background: rgba(255,255,255,0.05); color: #eef2ff; }
-    button { width: 100%; padding: 12px; border: none; border-radius: 10px; background: linear-gradient(135deg, #f5c22c, #b9860a); color: #141204; font-weight: 700; cursor: pointer; }
-    .status { min-height: 18px; margin-top: 10px; font-size: 13px; }
-    .status.success { color: #9fe1cb; }
-    .status.error { color: #f0997b; }
-    table { width: 100%; border-collapse: collapse; margin-top: 16px; }
-    th, td { padding: 10px; border-bottom: 1px solid rgba(245,194,44,0.15); }
-    th { color: #f5c22c; text-align: left; font-size: 13px; }
-    .badge { padding: 4px 8px; border-radius: 8px; background: rgba(245,194,44,0.12); color: #f5c22c; font-size: 12px; }
-    .delete-btn { padding: 6px 10px; border: none; border-radius: 8px; background: rgba(255,80,80,0.16); color: #ffb3b3; cursor: pointer; }
-    .empty { padding: 20px; color: rgba(226,232,240,0.7); text-align: center; }
-    @media (max-width: 820px) { .page { flex-direction: column; } .sidebar { width: 100%; } }
-  </style>
+    <meta charset="UTF-8">
+    <title>Manage Courses</title>
+    <style>
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+            background: #081124;
+            color: #eef2ff;
+        }
+
+        .page {
+            display: flex;
+            min-height: 100vh;
+        }
+
+        .sidebar {
+            width: 220px;
+            background: #0d1a35;
+            padding: 20px;
+        }
+
+        .sidebar h2 {
+            color: #f5c22c;
+            margin-bottom: 16px;
+        }
+
+        .sidebar a {
+            display: block;
+            color: #cbd5e1;
+            text-decoration: none;
+            margin: 8px 0;
+        }
+
+        .sidebar a.active,
+        .sidebar a:hover {
+            color: #f5c22c;
+        }
+
+        .main {
+            flex: 1;
+            padding: 24px;
+        }
+
+        .box {
+            background: rgba(255, 255, 255, 0.07);
+            border: 1px solid rgba(245, 194, 44, 0.2);
+            border-radius: 14px;
+            padding: 18px;
+            margin-bottom: 20px;
+        }
+
+        .box h1,
+        .box h2 {
+            margin: 0 0 12px;
+        }
+
+        .field {
+            margin-bottom: 12px;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 6px;
+            font-size: 13px;
+            color: #d1d5db;
+        }
+
+        input,
+        select {
+            width: 100%;
+            padding: 10px 12px;
+            border-radius: 10px;
+            border: 1px solid rgba(245, 194, 44, 0.2);
+            background: rgba(255, 255, 255, 0.05);
+            color: #eef2ff;
+        }
+
+        button {
+            width: 100%;
+            padding: 12px;
+            border: none;
+            border-radius: 10px;
+            background: linear-gradient(135deg, #f5c22c, #b9860a);
+            color: #141204;
+            font-weight: 700;
+            cursor: pointer;
+        }
+
+        .status {
+            min-height: 18px;
+            margin-top: 10px;
+            font-size: 13px;
+        }
+
+        .status.success {
+            color: #9fe1cb;
+        }
+
+        .status.error {
+            color: #f0997b;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 16px;
+        }
+
+        th,
+        td {
+            padding: 10px;
+            border-bottom: 1px solid rgba(245, 194, 44, 0.15);
+        }
+
+        th {
+            color: #f5c22c;
+            text-align: left;
+            font-size: 13px;
+        }
+
+        .badge {
+            padding: 4px 8px;
+            border-radius: 8px;
+            background: rgba(245, 194, 44, 0.12);
+            color: #f5c22c;
+            font-size: 12px;
+        }
+
+        .delete-btn {
+            padding: 6px 10px;
+            border: none;
+            border-radius: 8px;
+            background: rgba(255, 80, 80, 0.16);
+            color: #ffb3b3;
+            cursor: pointer;
+        }
+
+        .empty {
+            padding: 20px;
+            color: rgba(226, 232, 240, 0.7);
+            text-align: center;
+        }
+
+        @media (max-width: 820px) {
+            .page {
+                flex-direction: column;
+            }
+
+            .sidebar {
+                width: 100%;
+            }
+        }
+    </style>
 </head>
+
 <body>
-  <div class="page">
-    <div class="sidebar">
-      <h2>Admin</h2>
-      <a href="dashboard.html">Dashboard</a>
-      <a href="applications.html">Applications</a>
-      <a href="students.html">Students</a>
-      <a href="courses.html" class="active">Courses</a>
-      <a href="results.html">Results</a>
-    </div>
-    <div class="main">
-      <div class="box">
-        <h1>Add Course</h1>
-        <form id="courseForm">
-          <div class="field">
-            <label>Programme</label>
-            <select id="programme" required>
-              <option value="" disabled selected>Select programme</option>
-              <option value="Computer Science">Computer Science</option>
-              <option value="Cyber Security">Cyber Security</option>
-              <option value="Software Engineering">Software Engineering</option>
-              <option value="Information Technology">Information Technology</option>
-              <option value="Data Science">Data Science</option>
-            </select>
-          </div>
-          <div class="field">
-            <label>Course code</label>
-            <input id="courseCode" type="text" placeholder="e.g. CIS101" required>
-          </div>
-          <div class="field">
-            <label>Course name</label>
-            <input id="courseName" type="text" placeholder="e.g. Intro to Programming" required>
-          </div>
-          <div class="field">
-            <label>Credits</label>
-            <input id="credits" type="number" min="1" max="10" placeholder="3" required>
-          </div>
-          <button type="submit">Add course</button>
-          <div id="statusMsg" class="status"></div>
-        </form>
-      </div>
-      <div class="box">
-        <h2>Course List</h2>
-        <div class="field">
-          <label>Filter</label>
-          <select id="filterProgramme">
-            <option value="all">All programmes</option>
-            <option value="Computer Science">Computer Science</option>
-            <option value="Cyber Security">Cyber Security</option>
-            <option value="Software Engineering">Software Engineering</option>
-            <option value="Information Technology">Information Technology</option>
-            <option value="Data Science">Data Science</option>
-          </select>
+    <div class="page">
+        <div class="sidebar">
+            <h2>Admin</h2>
+            <a href="dashboard.html">Dashboard</a>
+            <a href="applications.html">Applications</a>
+            <a href="students.html">Students</a>
+            <a href="courses.html" class="active">Courses</a>
+            <a href="results.html">Results</a>
         </div>
-        <table>
-          <thead>
-            <tr>
-              <th>Code</th>
-              <th>Name</th>
-              <th>Programme</th>
-              <th>Credits</th>
-              <th>Action</th>
-            </tr>
-          </thead>
-          <tbody id="coursesTable"></tbody>
-        </table>
-        <div id="emptyState" class="empty">No courses available.</div>
-      </div>
+        <div class="main">
+            <div class="box">
+                <h1>Add Course</h1>
+                <form id="courseForm">
+                    <div class="field">
+                        <label>Programme</label>
+                        <select id="programme" required>
+                            <option value="" disabled selected>Select programme</option>
+                            <option value="Computer Science">Computer Science</option>
+                            <option value="Cyber Security">Cyber Security</option>
+                            <option value="Software Engineering">Software Engineering</option>
+                            <option value="Information Technology">Information Technology</option>
+                            <option value="Data Science">Data Science</option>
+                        </select>
+                    </div>
+                    <div class="field">
+                        <label>Course code</label>
+                        <input id="courseCode" type="text" placeholder="e.g. CIS101" required>
+                    </div>
+                    <div class="field">
+                        <label>Course name</label>
+                        <input id="courseName" type="text" placeholder="e.g. Intro to Programming" required>
+                    </div>
+                    <div class="field">
+                        <label>Credits</label>
+                        <input id="credits" type="number" min="1" max="10" placeholder="3" required>
+                    </div>
+                    <button type="submit">Add course</button>
+                    <div id="statusMsg" class="status"></div>
+                </form>
+            </div>
+            <div class="box">
+                <h2>Course List</h2>
+                <div class="field">
+                    <label>Filter</label>
+                    <select id="filterProgramme">
+                        <option value="all">All programmes</option>
+                        <option value="Computer Science">Computer Science</option>
+                        <option value="Cyber Security">Cyber Security</option>
+                        <option value="Software Engineering">Software Engineering</option>
+                        <option value="Information Technology">Information Technology</option>
+                        <option value="Data Science">Data Science</option>
+                    </select>
+                </div>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Code</th>
+                            <th>Name</th>
+                            <th>Programme</th>
+                            <th>Credits</th>
+                            <th>Action</th>
+                        </tr>
+                    </thead>
+                    <tbody id="coursesTable"></tbody>
+                </table>
+                <div id="emptyState" class="empty">No courses available.</div>
+            </div>
+        </div>
     </div>
-  </div>
-  <script type="module" src="./course.js"></script>
+    <script type="module" src="./course.js"></script>
 </body>
+
 </html>

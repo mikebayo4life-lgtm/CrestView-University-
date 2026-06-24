@@ -29,7 +29,7 @@
             flex-direction: column;
         }
 
-        .sidebar h2 {
+        .sidebar h2 a {
             text-align: center;
             padding: 22px 20px 18px;
             font-size: 17px;
@@ -49,6 +49,22 @@
             padding: 11px 20px;
             margin: 0 10px 4px;
             border-radius: 8px;
+            font-size: 14px;
+            border-left: 3px solid transparent;
+            transition: all 0.2s;
+        }
+
+        .sidebar a button {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            background-color: rgba(10, 35, 66, 1);
+            color: rgba(212, 175, 55, 0.6);
+            text-decoration: none;
+            /* padding: x; */
+            /* margin: -1px; */
+            border-radius: 8px;
+            border: none;
             font-size: 14px;
             border-left: 3px solid transparent;
             transition: all 0.2s;
@@ -255,13 +271,17 @@
 
     <div class="sidebar">
 
-        <h2>Student Portal</h2>
+        <h2><a href="../index.html">Student Portal</a></h2>
 
         <a href="dashboard.html">Dashboard</a>
         <a href="profile.html">Profile</a>
         <a href="results.html">Results</a>
         <a href="./register.html">Course Registration</a>
-        <a href="../Logs/login.html">Logout</a>
+        <!-- <a href=""><button id="changePasswordBtn">
+                Change Password
+            </button>
+        </a> -->
+        <a href="" id="logout">Logout</a>
 
     </div>
 
@@ -319,7 +339,9 @@
 
         import {
             getAuth,
-            onAuthStateChanged
+            onAuthStateChanged,
+            signOut,
+            sendPasswordResetEmail
         } from "https://www.gstatic.com/firebasejs/12.14.0/firebase-auth.js";
 
         const firebaseConfig = {
@@ -393,6 +415,41 @@
             const cgpa = count === 0 ? 0 : (totalPoints / count);
             document.getElementById("cgpa").innerText = cgpa.toFixed(2);
         });
+
+        document.getElementById("logout").addEventListener("click", async (e) => {
+            e.preventDefault();
+            await signOut(auth);
+
+            window.location.replace("/Logs/login.html");
+
+        });
+        // document.getElementById("changePasswordBtn").addEventListener("click", async () => {
+
+        //     const user = auth.currentUser;
+
+        //     try {
+
+        //         await sendPasswordResetEmail(
+        //             auth,
+        //             user.email
+        //         );
+
+        //         Swal.fire({
+        //             icon: "success",
+        //             title: "Reset Link Sent",
+        //             text: "A password reset link has been sent to your email."
+        //         });
+        //     } catch (error) {
+
+        //         Swal.fire({
+        //             icon: "error",
+        //             title: "Error",
+        //             text: error.message
+        //         });
+
+        //     }
+
+        // });
     </script>
 </body>
 

@@ -295,7 +295,6 @@
             text-decoration: underline;
         }
 
-        /* ── SECTIONS ── */
         section {
             padding: 90px 6%;
         }
@@ -338,7 +337,6 @@
             align-items: center;
         }
 
-        /* IMAGE CONTAINER */
         .about-img {
             position: relative;
             width: 100%;
@@ -354,7 +352,6 @@
             z-index: 2;
         }
 
-        /* GOLD BORDER EFFECT */
         .about-img::after {
             content: "";
             position: absolute;
@@ -367,13 +364,11 @@
             z-index: 1;
         }
 
-        /* CONTENT */
         .about-content {
             display: flex;
             flex-direction: column;
         }
 
-        /* POINTS */
         .about-points {
             margin-top: 25px;
             display: flex;
@@ -439,9 +434,9 @@
                 gap: 20px;
             }
 
-            .about-img {
-                /* height: 160px; */
-            }
+            /* .about-img {
+                height: 160px;
+            } */
 
             .about-img img {
                 height: 160px;
@@ -484,7 +479,6 @@
             }
         }
 
-        /* ── STATS STRIP ── */
         .stats-strip {
             background: #f7c210;
             display: grid;
@@ -515,7 +509,6 @@
             border-right: 2px solid rgba(21, 25, 72, 0.2);
         }
 
-        /* ── ADMISSION ── */
         .admission {
             background: #f4f4f4;
         }
@@ -562,7 +555,6 @@
             line-height: 1.65;
         }
 
-        /* ── SERVICES ── */
         .services {
             background: #151948;
         }
@@ -619,7 +611,6 @@
             line-height: 1.6;
         }
 
-        /* ── FOOTER ── */
         .footer-top {
             background: #0d1035;
             padding: 60px 6%;
@@ -674,7 +665,6 @@
             color: #555;
         }
 
-        /* ── MOBILE ── */
         @media (max-width: 900px) {
             .hero h1 {
                 font-size: 2.2rem;
@@ -738,8 +728,6 @@
                 padding-left: 30%;
             }
         }
-
-        /* Very small screens */
         @media (max-width: 300px) {
             header {
                 padding: 0 8px;
@@ -1040,7 +1028,7 @@
         </div>
     </footer>
 
-    <script> 
+    <script>
         const navToggle = document.querySelector('.nav-toggle');
         const nav = document.querySelector('nav');
 
@@ -1048,7 +1036,6 @@
             nav.classList.toggle('open');
         });
 
-        // TYPEWRITER EFFECT
         const text = "Welcome to Crestview University";
         const typewriter = document.getElementById("typewriter");
 

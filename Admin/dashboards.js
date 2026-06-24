@@ -6,6 +6,12 @@ import {
     getDocs
 } from "https://www.gstatic.com/firebasejs/12.14.0/firebase-firestore.js";
 
+import {
+    getAuth,
+    signOut
+} from "https://www.gstatic.com/firebasejs/12.14.0/firebase-auth.js";
+
+
 const firebaseConfig = {
     apiKey: "AIzaSyDjcNfeAoSv6l22eELrmnX82rs0Uh3TJ9I",
     authDomain: "school-management-f7a54.firebaseapp.com",
@@ -16,6 +22,7 @@ const firebaseConfig = {
 };
 
 const app = initializeApp(firebaseConfig);
+const auth = getAuth(app)
 const db = getFirestore(app);
 
 const applicationCount = document.getElementById("applicationCount");
@@ -60,3 +67,11 @@ applicationCount.innerHTML = totalApplications;
 studentCount.innerHTML = approvedStudents;
 
 pendingCount.innerHTML = pendingApplications;
+
+document.getElementById("logout").addEventListener("click", async (e) => {
+    e.preventDefault();
+    await signOut(auth);
+
+    window.location.replace("/Logs/login.html");
+
+});
