@@ -409,7 +409,7 @@
             console.log("Auth user:", user);
 
             if (!user) {
-                window.location.href = "../login.html";
+                window.location.href = new URL("../Logs/login.html", window.location.href).href;
                 return;
             }
 

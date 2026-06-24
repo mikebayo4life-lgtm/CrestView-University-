@@ -409,7 +409,7 @@
                                         title: "Admin Login Successful"
                                     }).then(() => {
 
-                                        window.location.href = "../Admin/dashboard.html";
+                                        window.location.href = new URL("../Admin/dashboard.html", window.location.href).href;
                                             
 
                                     });
@@ -464,7 +464,7 @@
                                         text: "Welcome to your student portal."
                                     }).then(() => {
 
-                                        window.location.href = "/Student/dashboard.html";
+                                        window.location.href = new URL("../Student/dashboard.html", window.location.href).href;
 
                                     });
 
