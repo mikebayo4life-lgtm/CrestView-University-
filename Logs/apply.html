@@ -611,17 +611,17 @@
                 return;
             }
 
-            if (number.length < 11) {
-                Swal.fire({
-                    icon: "error",
-                    title: "Invalid Phone Number",
-                    html: '<span style="font-size: 1.05rem;">Phone number must be at least 11 digits.</span>',
-                    confirmButtonText: 'OK',
-                    allowOutsideClick: false,
+            // if (number.length < 11) {
+            //     Swal.fire({
+            //         icon: "error",
+            //         title: "Invalid Phone Number",
+            //         html: '<span style="font-size: 1.05rem;">Phone number must be at least 11 digits.</span>',
+            //         confirmButtonText: 'OK',
+            //         allowOutsideClick: false,
                  
-                });
-                return;
-            }
+            //     });
+            //     return;
+            // }
 
             if (score < 0 || score > 400) {
                 Swal.fire({

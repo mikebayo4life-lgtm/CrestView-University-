@@ -4,287 +4,326 @@
 <head>
     <meta charset="UTF-8">
     <title>Student Results</title>
-
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
     <style>
-        @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500;600;700&family=Inter:wght@300;400;500;600&display=swap');
+       @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500;600;700&family=Inter:wght@300;400;500;600&display=swap');
 
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
 
-        body {
-            background: #07111f;
-            font-family: 'Inter', 'Segoe UI', sans-serif;
-            padding: 40px 36px;
-            min-height: 100vh;
-        }
+body {
+    min-height: 100vh;
+    padding: 20px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-family: 'Inter', sans-serif;
 
-        .container {
-            background: rgba(255, 255, 255, 0.02);
-            padding: 36px;
-            border-radius: 24px;
-            border: 1px solid rgba(201, 151, 0, 0.18);
-            max-width: 860px;
-            margin: 0 auto;
-            position: relative;
-            overflow: hidden;
-        }
+    background:
+        linear-gradient(rgba(10, 35, 66, .85),
+            rgba(10, 35, 66, .85)),
+        url("https://images.unsplash.com/photo-1562774053-701939374585?auto=format&fit=crop&w=1600&q=80");
 
-        .container::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 50%;
-            transform: translateX(-50%);
-            width: 220px;
-            height: 1px;
-            background: linear-gradient(90deg, transparent, #C99700, transparent);
-        }
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+}
 
-        .container::after {
-            content: '';
-            position: absolute;
-            top: -80px;
-            right: -80px;
-            width: 260px;
-            height: 260px;
-            background: radial-gradient(circle, rgba(201, 151, 0, 0.06) 0%, transparent 70%);
-            border-radius: 50%;
-            pointer-events: none;
-        }
+.img {
+    width: 100%;
+    max-width: 1000px;
+    position: relative;
+}
 
-        h2 {
-            margin-bottom: 28px;
-            color: #e8c84a;
-            font-family: 'Playfair Display', serif;
-            font-size: 26px;
-            font-weight: 600;
-            letter-spacing: 0.02em;
-            padding-bottom: 16px;
-            border-bottom: 1px solid rgba(201, 151, 0, 0.15);
-            position: relative;
-        }
+.container {
+    width: 100%;
+    background: rgba(255, 255, 255, 0.12);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    padding: 36px;
+    border-radius: 24px;
+    border: 1px solid rgba(201, 151, 0, 0.18);
+    position: relative;
+    overflow: hidden;
+}
 
-        h2::after {
-            content: '';
-            position: absolute;
-            bottom: -1px;
-            left: 0;
-            width: 60px;
-            height: 2px;
-            background: linear-gradient(90deg, #C99700, transparent);
-            border-radius: 2px;
-        }
+.container::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 220px;
+    height: 1px;
+    background: linear-gradient(90deg, transparent, #C99700, transparent);
+}
 
-        table {
-            width: 100%;
-            border-collapse: collapse;
-        }
+.container::after {
+    content: '';
+    position: absolute;
+    top: -80px;
+    right: -80px;
+    width: 260px;
+    height: 260px;
+    background: radial-gradient(circle, rgba(201, 151, 0, 0.06) 0%, transparent 70%);
+    border-radius: 50%;
+    pointer-events: none;
+}
 
-        thead tr {
-            background: linear-gradient(90deg, #0c1b38, #0f2246);
-            position: relative;
-        }
+h2 {
+    margin-bottom: 28px;
+    color: #e8c84a;
+    font-family: 'Playfair Display', serif;
+    font-size: 26px;
+    font-weight: 600;
+    letter-spacing: .02em;
+    padding-bottom: 16px;
+    border-bottom: 1px solid rgba(201, 151, 0, .15);
+    position: relative;
+}
 
-        thead tr::after {
-            content: '';
-            position: absolute;
-            bottom: 0;
-            left: 0;
-            right: 0;
-            height: 1px;
-            background: linear-gradient(90deg, transparent, #C99700, transparent);
-        }
+h2::after {
+    content: '';
+    position: absolute;
+    bottom: -1px;
+    left: 0;
+    width: 60px;
+    height: 2px;
+    background: linear-gradient(90deg, #C99700, transparent);
+}
 
-        th {
-            color: #e8c84a;
-            padding: 16px 18px;
-            font-family: 'Inter', sans-serif;
-            font-size: 11px;
-            font-weight: 600;
-            letter-spacing: 0.14em;
-            text-transform: uppercase;
-            text-align: center;
-        }
+table {
+    width: 100%;
+    border-collapse: collapse;
+}
 
-        th:first-child {
-            text-align: left;
-            border-radius: 10px 0 0 10px;
-        }
+thead tr {
+    background: linear-gradient(90deg, #0c1b38, #0f2246);
+}
 
-        th:last-child {
-            border-radius: 0 10px 10px 0;
-        }
+th {
+    color: #e8c84a;
+    padding: 16px;
+    text-transform: uppercase;
+    letter-spacing: .12em;
+    font-size: 12px;
+    text-align: center;
+}
 
-        tbody tr {
-            border-bottom: 1px solid rgba(201, 151, 0, 0.07);
-            transition: background 0.2s ease;
-        }
+th:first-child,
+td:first-child {
+    text-align: left;
+}
 
-        tbody tr:last-child {
-            border-bottom: none;
-        }
+tbody tr {
+    border-bottom: 1px solid rgba(201, 151, 0, .08);
+    transition: .3s;
+}
 
-        tbody tr:hover {
-            background: rgba(201, 151, 0, 0.04);
-        }
+tbody tr:hover {
+    background: rgba(201, 151, 0, .04);
+}
 
-        td {
-            padding: 16px 18px;
-            text-align: center;
-            color: #d8dce8;
-            font-size: 14px;
-            font-weight: 400;
-        }
+td {
+    padding: 16px;
+    text-align: center;
+    color: #d8dce8;
+    font-size: 14px;
+}
 
-        td:first-child {
-            text-align: left;
-            color: #e8eaf2;
-            font-weight: 500;
-            font-size: 14px;
-        }
+td:first-child {
+    color: #fff;
+    font-weight: 500;
+}
 
-        td:nth-child(2) {
-            font-variant-numeric: tabular-nums;
-            color: rgba(200, 210, 235, 0.85);
-            font-size: 14px;
-        }
+td:nth-child(3) {
+    color: #e8c84a;
+    font-weight: 600;
+}
 
-        td:nth-child(3) {
-            font-weight: 600;
-            font-size: 13px;
-            letter-spacing: 0.06em;
-        }
+.cgpa {
+    margin-top: 28px;
+    padding: 20px 24px;
+    background: linear-gradient(135deg,
+            rgba(12, 27, 56, .8),
+            rgba(9, 18, 40, .9));
+    border-radius: 14px;
+    border: 1px solid rgba(201, 151, 0, .22);
 
-        td:nth-child(3) {
-            color: #e8c84a;
-        }
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 15px;
+}
 
-        .cgpa {
-            margin-top: 28px;
-            padding: 20px 24px;
-            background: linear-gradient(135deg, rgba(12, 27, 56, 0.8), rgba(9, 18, 40, 0.9));
-            border-radius: 14px;
-            border: 1px solid rgba(201, 151, 0, 0.22);
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            position: relative;
-            overflow: hidden;
-        }
+.cgpa span:first-child {
+    font-size: 12px;
+    text-transform: uppercase;
+    letter-spacing: .14em;
+    color: rgba(201, 151, 0, .8);
+}
 
-        .cgpa::before {
-            content: '';
-            position: absolute;
-            left: 0;
-            top: 0;
-            bottom: 0;
-            width: 3px;
-            background: linear-gradient(180deg, #e8c84a, #8a5e00);
-            border-radius: 3px 0 0 3px;
-        }
+#cgpaValue {
+    font-family: 'Playfair Display', serif;
+    font-size: 32px;
+    font-weight: 700;
+    color: #e8c84a;
+}
 
-        .cgpa::after {
-            content: '';
-            position: absolute;
-            right: -30px;
-            top: -30px;
-            width: 120px;
-            height: 120px;
-            background: radial-gradient(circle, rgba(201, 151, 0, 0.07) 0%, transparent 70%);
-            border-radius: 50%;
-            pointer-events: none;
-        }
+.back-home {
+    position: absolute;
+    top: -55px;
+    left: 0;
+    width: 42px;
+    height: 42px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-decoration: none;
+    color: white;
+    background: rgba(255, 255, 255, .08);
+    border: 1px solid rgba(255, 255, 255, .15);
+    transition: .3s;
+}
 
-        .cgpa span:first-child {
-            font-size: 11px;
-            font-weight: 600;
-            letter-spacing: 0.14em;
-            text-transform: uppercase;
-            color: rgba(201, 151, 0, 0.7);
-        }
+.back-home:hover {
+    color: #f5c22c;
+    transform: translateX(-3px);
+}
 
-        #cgpaValue {
-            font-family: 'Playfair Display', serif;
-            font-size: 32px;
-            font-weight: 700;
-            color: #e8c84a;
-            letter-spacing: 0.02em;
-            text-shadow: 0 0 24px rgba(201, 151, 0, 0.25);
-        }
+@media (max-width: 768px) {
 
-        /* ::-webkit-scrollbar {
-            width: 6px;
-        }
+    body {
+        padding: 15px;
+        align-items: flex-start;
+    }
 
-        ::-webkit-scrollbar-track {
-            background: #07111f;
-        }
+    .container {
+        padding: 24px 18px;
+    }
 
-        ::-webkit-scrollbar-thumb {
-            background: rgba(201, 151, 0, 0.3);
-            border-radius: 3px;
-        }
+    h2 {
+        font-size: 22px;
+    }
 
-        ::-webkit-scrollbar-thumb:hover {
-            background: rgba(201, 151, 0, 0.5);
-        } */
+    th,
+    td {
+        padding: 12px 8px;
+        font-size: 13px;
+    }
 
-        @media (max-width: 600px) {
-            body {
-                padding: 20px 16px;
-            }
+    .cgpa {
+        flex-direction: column;
+        text-align: center;
+    }
 
-            .container {
-                padding: 22px 18px;
-                border-radius: 16px;
-            }
+    #cgpaValue {
+        font-size: 28px;
+    }
 
-            th,
-            td {
-                padding: 12px 10px;
-                font-size: 13px;
-            }
+    .back-home {
+        top: -50px;
+    }
+}
 
-            #cgpaValue {
-                font-size: 26px;
-            }
-        }
+@media (max-width: 600px) {
+
+    .container {
+        padding: 18px 14px;
+        border-radius: 16px;
+    }
+
+    table {
+        display: block;
+        overflow-x: auto;
+        white-space: nowrap;
+    }
+
+    h2 {
+        font-size: 20px;
+    }
+
+    th,
+    td {
+        font-size: 12px;
+        padding: 10px 6px;
+    }
+
+    #cgpaValue {
+        font-size: 24px;
+    }
+
+    .cgpa {
+        padding: 16px;
+    }
+}
+
+@media (max-width: 480px) {
+
+    body {
+        padding: 10px;
+    }
+
+    .container {
+        padding: 15px 12px;
+    }
+
+    h2 {
+        font-size: 18px;
+    }
+
+    .back-home {
+        width: 38px;
+        height: 38px;
+        font-size: 14px;
+    }
+
+    #cgpaValue {
+        font-size: 22px;
+    }
+}
     </style>
 
 </head>
 
 <body>
+    <div class="img">
+        <a href="./dashboard.html" class="back-home">
+            <i class="fa-solid fa-arrow-left"></i>
+        </a>
+        <div class="container">
 
-    <div class="container">
+            <h2>Academic Results</h2>
+            <div class="table-wrapper">
+                <table>
 
-        <h2>Academic Results</h2>
+                    <thead>
 
-        <table>
+                        <tr>
+                            <th>Course</th>
+                            <th>Score</th>
+                            <th>Grade</th>
+                        </tr>
 
-            <thead>
+                    </thead>
 
-                <tr>
-                    <th>Course</th>
-                    <th>Score</th>
-                    <th>Grade</th>
-                </tr>
+                    <tbody id="resultTable">
 
-            </thead>
+                    </tbody>
 
-            <tbody id="resultTable">
+                </table>
+            </div>
+            <div class="cgpa">
+                <span>CGPA:</span>
+                <span id="cgpaValue">0.00</span>
+            </div>
 
-            </tbody>
-
-        </table>
-
-        <div class="cgpa">
-            <span>CGPA:</span>
-            <span id="cgpaValue">0.00</span>
         </div>
-
     </div>
     <script type="module">
         import { initializeApp } from "https://www.gstatic.com/firebasejs/12.14.0/firebase-app.js";
@@ -312,7 +351,6 @@
         const db = getFirestore(app);
         const auth = getAuth(app);
 
-        // 🎯 Grade function
         function getGrade(score) {
             if (score >= 70) return "A";
             if (score >= 60) return "B";
@@ -320,7 +358,6 @@
             return "D";
         }
 
-        // 🎯 Grade point for CGPA
         function getPoint(score) {
             if (score >= 70) return 5;
             if (score >= 60) return 4;
@@ -340,7 +377,6 @@
                 return;
             }
 
-            // 1. Get student profile first
             const apps = await getDocs(collection(db, "applications"));
 
             let studentMatric = null;
@@ -354,7 +390,6 @@
 
             if (!studentMatric) return;
 
-            // 2. Load results
             const snapshot = await getDocs(collection(db, "results"));
 
             const table = document.getElementById("resultTable");
@@ -365,7 +400,6 @@
             snapshot.forEach((doc) => {
                 const data = doc.data();
 
-                // ✅ FILTER BY MATRIC NUMBER
                 if (data.matricNo === studentMatric) {
 
                     const score = Number(data.score);

@@ -340,7 +340,6 @@
         const db = getFirestore(app);
         const auth = getAuth(app);
 
-        // 🔥 Grade function
         function getGrade(score) {
             if (score >= 70) return "A";
             if (score >= 60) return "B";
@@ -348,7 +347,6 @@
             return "D";
         }
 
-        // 🔥 Load results
         async function loadResults() {
             const table = document.getElementById("resultTable");
             table.innerHTML = "";
@@ -370,7 +368,6 @@
             });
         }
 
-        // 🔥 Upload result
         document.getElementById("uploadBtn").addEventListener("click", async () => {
             const matricNo = document.getElementById("matricNo").value;
             const course = document.getElementById("course").value;
@@ -398,7 +395,6 @@
             loadResults();
         });
 
-        // 🔥 Auth check (optional but good)
         onAuthStateChanged(auth, (user) => {
             if (!user) {
                 window.location.href = "../login.html";

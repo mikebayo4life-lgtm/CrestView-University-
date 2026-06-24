@@ -335,7 +335,6 @@
         const db = getFirestore(app);
         const auth = getAuth(app);
 
-        // 🎯 grading helpers
         function getPoint(score) {
             if (score >= 70) return 5;
             if (score >= 60) return 4;
@@ -351,7 +350,6 @@
                 return;
             }
 
-            // 1. GET STUDENT PROFILE
             const apps = await getDocs(collection(db, "applications"));
 
             let student = null;
@@ -375,7 +373,6 @@
             document.getElementById("programme").innerText =
                 student.course;
 
-            // 2. GET RESULTS
             const resultsSnap = await getDocs(collection(db, "results"));
 
             let count = 0;
@@ -384,7 +381,6 @@
             resultsSnap.forEach((doc) => {
                 const r = doc.data();
 
-                // 🔐 FILTER BY MATRIC NUMBER
                 if (r.matricNo === student.matricNumber) {
 
                     count++;
@@ -392,7 +388,6 @@
                 }
             });
 
-            // 3. UPDATE UI
             document.getElementById("resultCount").innerText = count;
 
             const cgpa = count === 0 ? 0 : (totalPoints / count);

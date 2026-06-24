@@ -68,7 +68,6 @@ displayStudents(students);
 
 studentCount.innerHTML = totalStudents;
 
-// Search
 searchInput.addEventListener("input", () => {
 
     const newSearch = searchInput.value.toLowerCase();
