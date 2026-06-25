@@ -76,5 +76,5 @@ document.getElementById("logout").addEventListener("click", async (e) => {
         console.error(error);
     }
 
-    window.location.replace(new URL("../Logs/login.html", window.location.href).href);
+    window.location.replace("../Logs/login.html");
 });
