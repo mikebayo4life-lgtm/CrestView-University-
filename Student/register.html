@@ -329,7 +329,7 @@
                 <h1>Course Registration</h1>
                 <div class="programme-tag" id="programmeTag">Loading programme...</div>
             </div>
-            <div class="locked-banner" id="lockedBanner">You have already registered courses. Contact admin to change.
+            <div class="locked-banner" id="lockedBanner">You have already registered courses.
             </div>
             <div class="box" id="courseList">
                 <div class="empty-state">Loading courses...</div>
@@ -443,7 +443,7 @@
             const selected = [...document.querySelectorAll(".course:checked")];
 
             if (!selected.length) {
-                alert("Select a course");
+                Swal.fire("Select a course");
                 return;
             }
 
@@ -460,7 +460,7 @@
                 courses
             });
 
-            alert("Registration Successful");
+            Swal.fire("Registration Successful");
 
             submitBtn.disabled = true;
             submitBtn.textContent = "Already Registered";
@@ -471,6 +471,7 @@
             // else location.href = "../Logs/login.html";
         });
     </script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 </body>
 
 </html>
