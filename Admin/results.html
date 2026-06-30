@@ -374,7 +374,7 @@
             const score = document.getElementById("score").value;
 
             if (!matricNo || !course || !score) {
-                alert("Please fill all fields");
+                Swal.fire("Please fill all fields");
                 return;
             }
 
@@ -386,7 +386,7 @@
                 createdAt: serverTimestamp()
             });
 
-            alert("Result Uploaded Successfully!");
+            Swal.fire("Result Uploaded Successfully!");
 
             document.getElementById("matricNo").value = "";
             document.getElementById("course").value = "";
@@ -404,7 +404,7 @@
             loadResults();
         });
     </script>
-
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 </body>
 
 </html>
