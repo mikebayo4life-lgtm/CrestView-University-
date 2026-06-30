@@ -7,9 +7,10 @@
     <style>
         body {
             margin: 0;
-            font-family: Arial, sans-serif;
-            background: #081124;
+            font-family: 'Georgia', 'Times New Roman', serif;
+            background: linear-gradient(160deg, #050b1a 0%, #0a1530 50%, #050b1a 100%);
             color: #eef2ff;
+            min-height: 100vh;
         }
 
         .page {
@@ -19,75 +20,114 @@
 
         .sidebar {
             width: 220px;
-            background: #0d1a35;
-            padding: 20px;
+            background: linear-gradient(180deg, #0b1530 0%, #060d20 100%);
+            padding: 28px 20px;
+            border-right: 1px solid rgba(245, 194, 44, 0.25);
+            box-shadow: 4px 0 24px rgba(0, 0, 0, 0.35);
         }
 
         .sidebar h2 {
             color: #f5c22c;
-            margin-bottom: 16px;
+            margin-bottom: 24px;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            font-size: 18px;
+            border-bottom: 1px solid rgba(245, 194, 44, 0.25);
+            padding-bottom: 14px;
         }
 
         .sidebar a {
             display: block;
-            color: #cbd5e1;
+            color: #b9c2d8;
             text-decoration: none;
-            margin: 8px 0;
+            margin: 10px 0;
+            padding: 8px 10px;
+            border-radius: 8px;
+            font-size: 14px;
+            letter-spacing: 0.3px;
+            transition: all 0.25s ease;
+            border-left: 2px solid transparent;
         }
 
         .sidebar a.active,
         .sidebar a:hover {
             color: #f5c22c;
+            background: rgba(245, 194, 44, 0.08);
+            border-left: 2px solid #f5c22c;
         }
 
         .main {
             flex: 1;
-            padding: 24px;
+            padding: 32px;
         }
 
         .box {
-            background: rgba(255, 255, 255, 0.07);
-            border: 1px solid rgba(245, 194, 44, 0.2);
-            border-radius: 14px;
-            padding: 18px;
-            margin-bottom: 20px;
+            background: linear-gradient(145deg, rgba(255, 255, 255, 0.06), rgba(255, 255, 255, 0.02));
+            border: 1px solid rgba(245, 194, 44, 0.25);
+            border-radius: 16px;
+            padding: 24px;
+            margin-bottom: 24px;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.35), inset 0 1px 0 rgba(245, 194, 44, 0.08);
+            backdrop-filter: blur(6px);
         }
 
         .box h1,
         .box h2 {
-            margin: 0 0 12px;
+            margin: 0 0 18px;
+            color: #f5c22c;
+            font-weight: 600;
+            letter-spacing: 0.5px;
         }
 
         .field {
-            margin-bottom: 12px;
+            margin-bottom: 16px;
         }
 
         label {
             display: block;
             margin-bottom: 6px;
             font-size: 13px;
-            color: #d1d5db;
+            color: #c3cbe0;
+            letter-spacing: 0.3px;
         }
 
         input,
         select {
             width: 100%;
-            padding: 10px 12px;
+            padding: 11px 14px;
             border-radius: 10px;
-            border: 1px solid rgba(245, 194, 44, 0.2);
-            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(245, 194, 44, 0.3);
+            background: rgba(8, 17, 36, 0.6);
             color: #eef2ff;
+            font-family: inherit;
+            box-sizing: border-box;
+            transition: border-color 0.25s ease, box-shadow 0.25s ease;
+        }
+
+        input:focus,
+        select:focus {
+            outline: none;
+            border-color: #f5c22c;
+            box-shadow: 0 0 0 3px rgba(245, 194, 44, 0.15);
         }
 
         button {
             width: 100%;
-            padding: 12px;
+            padding: 13px;
             border: none;
             border-radius: 10px;
-            background: linear-gradient(135deg, #f5c22c, #b9860a);
+            background: linear-gradient(135deg, #ffe07a, #f5c22c 45%, #b9860a);
             color: #141204;
             font-weight: 700;
+            letter-spacing: 0.5px;
             cursor: pointer;
+            box-shadow: 0 4px 14px rgba(245, 194, 44, 0.3);
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+        }
+
+        button:hover {
+            transform: translateY(-1px);
+            box-shadow: 0 6px 20px rgba(245, 194, 44, 0.45);
         }
 
         .status {
@@ -107,42 +147,61 @@
         table {
             width: 100%;
             border-collapse: collapse;
-            margin-top: 16px;
+            margin-top: 18px;
         }
 
         th,
         td {
-            padding: 10px;
+            padding: 12px 10px;
             border-bottom: 1px solid rgba(245, 194, 44, 0.15);
         }
 
         th {
             color: #f5c22c;
             text-align: left;
-            font-size: 13px;
+            font-size: 12px;
+            letter-spacing: 0.8px;
+            text-transform: uppercase;
+        }
+
+        td {
+            color: #dbe2f5;
+            font-size: 14px;
+        }
+
+        tr:hover td {
+            background: rgba(245, 194, 44, 0.04);
         }
 
         .badge {
-            padding: 4px 8px;
+            padding: 5px 10px;
             border-radius: 8px;
             background: rgba(245, 194, 44, 0.12);
+            border: 1px solid rgba(245, 194, 44, 0.25);
             color: #f5c22c;
             font-size: 12px;
+            letter-spacing: 0.3px;
         }
 
         .delete-btn {
-            padding: 6px 10px;
-            border: none;
+            padding: 7px 12px;
+            border: 1px solid rgba(255, 80, 80, 0.3);
             border-radius: 8px;
-            background: rgba(255, 80, 80, 0.16);
+            background: rgba(255, 80, 80, 0.12);
             color: #ffb3b3;
             cursor: pointer;
+            transition: background 0.25s ease;
+        }
+
+        .delete-btn:hover {
+            background: rgba(255, 80, 80, 0.22);
         }
 
         .empty {
-            padding: 20px;
-            color: rgba(226, 232, 240, 0.7);
+            padding: 24px;
+            color: rgba(226, 232, 240, 0.55);
             text-align: center;
+            font-style: italic;
         }
 
         @media (max-width: 820px) {
@@ -152,6 +211,7 @@
 
             .sidebar {
                 width: 100%;
+                box-sizing: border-box;
             }
         }
     </style>
