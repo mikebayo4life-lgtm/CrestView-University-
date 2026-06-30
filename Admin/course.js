@@ -13,15 +13,15 @@ import {
     onAuthStateChanged
 } from "https://www.gstatic.com/firebasejs/12.14.0/firebase-auth.js";
 
-const app = initializeApp({
-    apiKey: "YOUR_API_KEY",
+const firebaseConfig = {
+    apiKey: "AIzaSyDjcNfeAoSv6l22eELrmnX82rs0Uh3TJ9I",
     authDomain: "school-management-f7a54.firebaseapp.com",
     projectId: "school-management-f7a54",
     storageBucket: "school-management-f7a54.firebasestorage.app",
     messagingSenderId: "333306723954",
     appId: "1:333306723954:web:36b88533e53aee10128ceb"
-});
-
+};
+const app = initializeApp(firebaseConfig);
 const db = getFirestore(app);
 const auth = getAuth(app);
 
@@ -61,10 +61,15 @@ function displayCourses() {
 form.addEventListener("submit", async e => {
     e.preventDefault();
 
-    const programme = programme.value;
-    const courseCode = courseCode.value.trim();
-    const courseName = courseName.value.trim();
-    const credits = Number(credits.value);
+    const programmeEl = document.getElementById("programme");
+    const courseCodeEl = document.getElementById("courseCode");
+    const courseNameEl = document.getElementById("courseName");
+    const creditsEl = document.getElementById("credits");
+
+    const programme = programmeEl.value;
+    const courseCode = courseCodeEl.value.trim();
+    const courseName = courseNameEl.value.trim();
+    const credits = Number(creditsEl.value);
 
     const ref = await addDoc(collection(db, "courses"), {
         programme,
